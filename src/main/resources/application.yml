@@ -1,0 +1,28 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: datalake_subscriber_java
+
+  # kafka:
+  #   consumer:
+  #     bootstrap-servers: localhost:9092
+  #     group-id: test
+  #     enable-auto-commit: true
+  #     auto-commit-interval: 1000
+  #     key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  #     value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  #   topic:
+  #     test-datalake: test-datalake
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/datalake
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
