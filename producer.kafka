@@ -1,0 +1,40 @@
+
+
+PRODUCER
+topic: test-datalake
+{
+    "Timestamp": "2024-07-30T04:05:46.823+00:00",
+    "Topic": "submit_reguler_survey",
+    "Partition": 4,
+    "SchemaId": null,
+    "SchemaType": null,
+    "Key": null,
+    "Headers": null,
+    "Message": {
+        "order_id": "2407000610",
+        "detail": {
+            "debitur": {
+                "jumlah_debitur": 660,
+                "personal": {
+                    "debitur_area_branch_desc": "AREA JABODETABEK 1"
+                },
+                "external_sales_force": [
+                    {
+                        "external_sales_no": "040817000012"
+                    }
+                ],
+                "internal_sales_force": [
+                    {
+                        "internal_sales_head_name": "John Doe"
+                    },
+                    {
+                        "internal_sales_head_name": "John Lee"
+                    }
+                ]
+            }
+        }
+    }
+}
+
+
+
