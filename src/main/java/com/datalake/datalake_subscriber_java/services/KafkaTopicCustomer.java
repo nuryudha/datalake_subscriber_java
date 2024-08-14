@@ -12,7 +12,7 @@ public class KafkaTopicCustomer {
     @Autowired
     private DatalakeService datalakeService;
 
-    @KafkaListener(topics = "${spring.kafka.topic.test-datalake}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${spring.kafka.topic.listTopic}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenToTopic1(String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         datalakeService.processMessage(topic, message);
     }

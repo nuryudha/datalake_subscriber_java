@@ -24,6 +24,7 @@ public class RegulerSurveyProcessor implements TopicProcessor {
 
         // Mengambil data dari JSON
         String order_id = getOrderId(gsonMessage);
+        String current_form_desc = getCurrentFormDesc(gsonMessage);
         // String debitur_area_branch_desc = getDebiturAreaBranchDesc(gsonMessage);
         // Long jumlah_debitur = getJumlahDebitur(gsonMessage);
         // String external_sales_no = getExternalSalesNo(gsonMessage);
@@ -37,6 +38,7 @@ public class RegulerSurveyProcessor implements TopicProcessor {
                 // Membungkus dalam datalake entity / tabelnya
                 DatalakeEntity datalakeEntity = new DatalakeEntity();
                 datalakeEntity.setOrder_id(order_id);
+                datalakeEntity.setCurrent_form_desc(current_form_desc);
                 // datalakeEntity.setDebitur_area_branch_desc(debitur_area_branch_desc);
                 // datalakeEntity.setJumlah_debitur(jumlah_debitur);
                 // datalakeEntity.setExternal_sales_no(external_sales_no);
@@ -60,56 +62,64 @@ public class RegulerSurveyProcessor implements TopicProcessor {
         return getStringValue(message, "order_id");
     }
 
-    private String getDebiturAreaBranchDesc(Map<String, Object> map) {
-        Map<String, Object> message = getNestedMap(map, "Message");
-        Map<String, Object> detail = getNestedMap(message, "detail");
-        Map<String, Object> debitur = getNestedMap(detail, "debitur");
-        Map<String, Object> personal = getNestedMap(debitur, "personal");
+    private String getCurrentFormDesc(Map<String,Object> map){
+        Map<String, Object> message = getNestedMap(map,"Message");
 
-        return getStringValue(personal, "debitur_area_branch_desc");
-    }
-
-    private Long getJumlahDebitur(Map<String, Object> map) {
-        Map<String, Object> message = getNestedMap(map, "Message");
-        Map<String, Object> detail = getNestedMap(message, "detail");
-        Map<String, Object> debitur = getNestedMap(detail, "debitur");
-
-        return getLongValue(debitur, "jumlah_debitur");
-    }
-
-    @SuppressWarnings("unchecked")
-    private String getExternalSalesNo(Map<String, Object> map) {
-        Map<String, Object> message = getNestedMap(map, "Message");
-        Map<String, Object> detail = getNestedMap(message, "detail");
-        Map<String, Object> debitur = getNestedMap(detail, "debitur");
-        List<Map<String, Object>> externalSalesForce = (List<Map<String, Object>>) debitur.get("external_sales_force");
-
-        if (externalSalesForce != null && !externalSalesForce.isEmpty()) {
-            Map<String, Object> firstExternalSales = externalSalesForce.get(0);
-
-            return getStringValue(firstExternalSales, "external_sales_no");
-        }
-
-        return "";
+        return getStringValue(message, "current_form_desc");
 
     }
 
-    @SuppressWarnings("unchecked")
-    private String getInternalSalesHeadName(Map<String, Object> map) {
-        Map<String, Object> message = getNestedMap(map, "Message");
-        Map<String, Object> detail = getNestedMap(message, "detail");
-        Map<String, Object> debitur = getNestedMap(detail, "debitur");
-        List<Map<String, Object>> internalSalesForce = (List<Map<String, Object>>) debitur.get("internal_sales_force");
 
-        if (internalSalesForce != null && !internalSalesForce.isEmpty()) {
-            Map<String, Object> firstInternalSales = internalSalesForce.get(0);
+    // private String getDebiturAreaBranchDesc(Map<String, Object> map) {
+    //     Map<String, Object> message = getNestedMap(map, "Message");
+    //     Map<String, Object> detail = getNestedMap(message, "detail");
+    //     Map<String, Object> debitur = getNestedMap(detail, "debitur");
+    //     Map<String, Object> personal = getNestedMap(debitur, "personal");
 
-            return getStringValue(firstInternalSales, "internal_sales_head_name");
-        }
+    //     return getStringValue(personal, "debitur_area_branch_desc");
+    // }
 
-        return "";
+    // private Long getJumlahDebitur(Map<String, Object> map) {
+    //     Map<String, Object> message = getNestedMap(map, "Message");
+    //     Map<String, Object> detail = getNestedMap(message, "detail");
+    //     Map<String, Object> debitur = getNestedMap(detail, "debitur");
 
-    }
+    //     return getLongValue(debitur, "jumlah_debitur");
+    // }
+
+    // @SuppressWarnings("unchecked")
+    // private String getExternalSalesNo(Map<String, Object> map) {
+    //     Map<String, Object> message = getNestedMap(map, "Message");
+    //     Map<String, Object> detail = getNestedMap(message, "detail");
+    //     Map<String, Object> debitur = getNestedMap(detail, "debitur");
+    //     List<Map<String, Object>> externalSalesForce = (List<Map<String, Object>>) debitur.get("external_sales_force");
+
+    //     if (externalSalesForce != null && !externalSalesForce.isEmpty()) {
+    //         Map<String, Object> firstExternalSales = externalSalesForce.get(0);
+
+    //         return getStringValue(firstExternalSales, "external_sales_no");
+    //     }
+
+    //     return "";
+
+    // }
+
+    // @SuppressWarnings("unchecked")
+    // private String getInternalSalesHeadName(Map<String, Object> map) {
+    //     Map<String, Object> message = getNestedMap(map, "Message");
+    //     Map<String, Object> detail = getNestedMap(message, "detail");
+    //     Map<String, Object> debitur = getNestedMap(detail, "debitur");
+    //     List<Map<String, Object>> internalSalesForce = (List<Map<String, Object>>) debitur.get("internal_sales_force");
+
+    //     if (internalSalesForce != null && !internalSalesForce.isEmpty()) {
+    //         Map<String, Object> firstInternalSales = internalSalesForce.get(0);
+
+    //         return getStringValue(firstInternalSales, "internal_sales_head_name");
+    //     }
+
+    //     return "";
+
+    // }
 
     // HISTORY1
 
