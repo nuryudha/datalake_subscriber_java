@@ -20,16 +20,14 @@ public class RegulerSurveyProcessor implements TopicProcessor {
     @Override
     @Transactional
     public void process(String message) {
-        System.out.println("INI MESSAGENYA =  " + message);
         Map<String, Object> gsonMessage = parseMessage(message);
-        System.out.println("INI MESSAGE yang sudah di parse =  " + gsonMessage);
 
         // Mengambil data dari JSON
         String order_id = getOrderId(gsonMessage);
-        String debitur_area_branch_desc = getDebiturAreaBranchDesc(gsonMessage);
-        Long jumlah_debitur = getJumlahDebitur(gsonMessage);
-        String external_sales_no = getExternalSalesNo(gsonMessage);
-        String internal_sales_head_name = getInternalSalesHeadName(gsonMessage);
+        // String debitur_area_branch_desc = getDebiturAreaBranchDesc(gsonMessage);
+        // Long jumlah_debitur = getJumlahDebitur(gsonMessage);
+        // String external_sales_no = getExternalSalesNo(gsonMessage);
+        // String internal_sales_head_name = getInternalSalesHeadName(gsonMessage);
 
         if (order_id != null && !order_id.isEmpty()) {
             boolean exists = datalakeRepository.existsByOrder_id(order_id);
@@ -39,10 +37,10 @@ public class RegulerSurveyProcessor implements TopicProcessor {
                 // Membungkus dalam datalake entity / tabelnya
                 DatalakeEntity datalakeEntity = new DatalakeEntity();
                 datalakeEntity.setOrder_id(order_id);
-                datalakeEntity.setDebitur_area_branch_desc(debitur_area_branch_desc);
-                datalakeEntity.setJumlah_debitur(jumlah_debitur);
-                datalakeEntity.setExternal_sales_no(external_sales_no);
-                datalakeEntity.setInternal_sales_head_name(internal_sales_head_name);
+                // datalakeEntity.setDebitur_area_branch_desc(debitur_area_branch_desc);
+                // datalakeEntity.setJumlah_debitur(jumlah_debitur);
+                // datalakeEntity.setExternal_sales_no(external_sales_no);
+                // datalakeEntity.setInternal_sales_head_name(internal_sales_head_name);
 
                 datalakeRepository.save(datalakeEntity);
 
