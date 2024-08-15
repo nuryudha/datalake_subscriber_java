@@ -2213,7 +2213,7 @@
         ]
       },
       "deviasi": {
-        "max_deviasi": 0,
+        "max_deviasi": 12,
         "detail_deviasi": []
       },
       "scoring": {

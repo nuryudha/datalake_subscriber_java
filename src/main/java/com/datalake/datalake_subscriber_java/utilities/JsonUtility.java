@@ -29,7 +29,7 @@ public class JsonUtility {
                 return ((Number) value).longValue();
             }
         }
-        return null;
+        return 0L;
     }
 
     @SuppressWarnings("unchecked")
@@ -41,27 +41,18 @@ public class JsonUtility {
         return value instanceof Map ? (Map<String, Object>) value : null;
     }
 
-    public String getNestedNestedMap(Map<String, Object> map, Map<String, Object> mapNested) {
+    public Map<String, Object> getNestedNestedMap(Map<String, Object> map,
+            Map<String, Object> mapNested) {
         int jumlahNested = Integer.parseInt(mapNested.get("jumlahNested").toString());
-        String[] keys = {
-                mapNested.get("keyNested_1").toString(),
-                mapNested.get("keyNested_2").toString(),
-                mapNested.get("keyNested_3").toString(),
-                mapNested.get("keyNested_4").toString(),
-                mapNested.get("keyNested_5").toString()
-        };
-
         Map<String, Object> currentMap = map;
-        String result = "";
-
-        for (int i = 0; i < jumlahNested; i++) {
-            currentMap = getNestedMap(currentMap, keys[i]);
+        for (int i = 1; i <= jumlahNested; i++) {
+            String key = mapNested.get("keyNested_" + i).toString();
+            currentMap = getNestedMap(currentMap, key);
             if (currentMap == null) {
                 return null;
             }
         }
-
-        return result;
+        return currentMap;
     }
 
 }

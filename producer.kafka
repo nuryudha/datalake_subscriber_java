@@ -3,37 +3,165 @@
 PRODUCER
 topic: test-datalake
 {
-    "Timestamp": "2024-07-30T04:05:46.823+00:00",
-    "Topic": "submit_reguler_survey",
-    "Partition": 4,
-    "SchemaId": null,
-    "SchemaType": null,
-    "Key": null,
-    "Headers": null,
-    "Message": {
-        "order_id": "2407000610",
-        "detail": {
-            "debitur": {
-                "jumlah_debitur": 660,
-                "personal": {
-                    "debitur_area_branch_desc": "AREA JABODETABEK 1"
-                },
-                "external_sales_force": [
-                    {
-                        "external_sales_no": "040817000012"
-                    }
-                ],
-                "internal_sales_force": [
-                    {
-                        "internal_sales_head_name": "John Doe"
-                    },
-                    {
-                        "internal_sales_head_name": "John Lee"
-                    }
-                ]
-            }
+"Message":{
+  "detail": {
+    "debitur": {
+      "personal": {
+        "email": "Mar@gmail.com",
+        "no_ktp": "1503056005790001",
+        "no_hp_1": "085268544532",
+        "no_hp_2": "",
+        "foto_ktp": "",
+        "tempat_lahir": "GUNUNG KIDUL",
+        "jenis_kelamin": "P",
+        "tanggal_lahir": "20-MAY-1979",
+        "alamat_debitur": {
+          "alamat_ktp": {
+            "rt": "011",
+            "rw": "000",
+            "alamat": "PULAU REMBAN",
+            "kode_pos": "37481",
+            "desc_kab_kot": "KAB. SAROLANGUN",
+            "kode_kab_kot": "3104",
+            "desc_provinsi": "PROVINSI JAMBI",
+            "kode_provinsi": "31",
+            "desc_kecamatan": "SAROLANGUN",
+            "desc_kelurahan": "SUKASARI",
+            "kode_kecamatan": "12361",
+            "kode_kelurahan": "C0936"
+          }
+        },
+        "area_branch_id": "0010",
+        "area_branch_desc": "AREA SUMBAGSEL",
+        "status_perkawinan": "01",
+        "status_perkawinan_desc": "KAWIN"
+      }
+    },
+    "identitas_order": {
+      "internal_sales_force": [
+        {
+          "internal_sales_hp_no": "085218522530",
+          "internal_sales_com_br": "0613",
+          "internal_sales_head_id": "19013312",
+          "internal_sales_head_no": "2300008743",
+          "internal_sales_com_code": "MUF",
+          "internal_sales_force_id": "21017893",
+          "internal_sales_force_no": "2300008655",
+          "internal_sales_head_npk": "0013",
+          "internal_sales_job_code": "CMO",
+          "internal_sales_job_desc": "CREDIT MARKETING OFFICER",
+          "internal_sales_bank_code": "",
+          "internal_sales_force_npk": "000S",
+          "internal_sales_head_name": "HADI SAPUTRA",
+          "internal_sales_type_code": "1",
+          "internal_sales_type_desc": "INTERNAL SALES 1",
+          "internal_sales_force_desc": "PAHMI  RIDO",
+          "internal_sales_bank_acc_no": "",
+          "internal_sales_head_job_code": "CMH",
+          "internal_sales_head_job_desc": "CREDIT MARKETING HEAD"
         }
+      ],
+      "financing_type_desc": "KONVENSIONAL1"
+    },
+    "object_pembiayaan": {
+      "tenor": 0,
+      "max_loan": "0",
+      "obj_code": "004",
+      "obj_desc": "MOBIL BEKAS",
+      "obj_fuel": "",
+      "obj_year": "",
+      "obj_price": 0,
+      "obj_wheel": "",
+      "type_code": "",
+      "type_desc": "",
+      "brand_code": "",
+      "brand_desc": "",
+      "model_code": "",
+      "model_desc": "",
+      "down_payment": 0,
+      "eng_capacity": "",
+      "obj_made_code": "",
+      "obj_made_desc": "",
+      "sub_type_code": "",
+      "sub_type_desc": "",
+      "obj_group_code": "002",
+      "obj_group_desc": "MOBIL",
+      "disburse_amount": 0,
+      "type_genre_code": "",
+      "type_genre_desc": "",
+      "obj_market_price": 0,
+      "installment_amount": 0,
+      "obj_insr_group_code": "",
+      "obj_insr_group_desc": "",
+      "obj_model_group_code": "",
+      "obj_model_group_desc": "",
+      "total_installment_amount": 0
+    },
+    "status_entry_form_manual": {
+      "insert_by": "21017893",
+      "insert_date": "2024/03/21 10:04:35"
     }
+  },
+  "deviasi": {
+        "max_deviasi": 12,
+        "detail_deviasi": []
+      },
+  "order_id": "11",
+  "pk_payung": "",
+  "prioritas": 1,
+  "appl_va_no": [],
+  "order_mode": "00",
+  "promo_code": "",
+  "branch_code": "0613",
+  "branch_desc": "MUARA BUNGO",
+  "contract_id": [],
+  "screening_1": "NON IND IA-NORESPON",
+  "screening_2": "",
+  "screening_3": "",
+  "channel_code": "01",
+  "channel_desc": "DEALER/SHOWROOM",
+  "grading_slik": "NO RESPONSE",
+  "customer_name": "MARTIAH",
+  "flag_trade_in": "N",
+  "application_id": "",
+  "flag_marketing": "Y",
+  "flag_order_type": "ND",
+  "application_date": "",
+  "flag_data_format": "",
+  "grading_employee": "GREEN",
+  "insurance_com_id": "",
+  "mkt_program_code": "",
+  "mkt_program_desc": "",
+  "order_created_by": "21017893",
+  "scoring_dukcapil": "88",
+  "screening_1_date": "2024/03/21 10:05:54",
+  "screening_2_date": "",
+  "screening_3_date": "",
+  "source_form_code": "EFMAL",
+  "source_form_desc": "ENTRY FORM MANUAL",
+  "current_form_code": "EFMAL",
+  "current_form_desc": "ENTRY FORM MANUAL",
+  "purchase_order_id": "",
+  "source_order_code": "02",
+  "source_order_desc": "MUFSURVEY",
+  "customer_behaviour": "NEW CUSTOMER",
+  "customer_type_code": "03",
+  "customer_type_desc": "Tidak",
+  "financing_obj_code": "FO01",
+  "financing_obj_desc": "KENDARAAN",
+  "insurance_com_desc": "",
+  "order_created_date": "2024/03/21 10:04:35",
+  "status_assign_code": "03",
+  "status_assign_desc": "ENTRY MANUAL",
+  "applicant_type_code": "PER",
+  "applicant_type_desc": "PERSONAL",
+  "kelengkapan_dokumen": "LENGKAP",
+  "outlet_channel_code": "00K054",
+  "outlet_channel_desc": "HAZWAR MOTOR",
+  "grading_dealer_mitra": "GOLD 1",
+  "confirmation_letter_id": "",
+  "grading_customer_category": "NEW"
+}
 }
 
 
