@@ -1,4 +1,4 @@
-package com.datalake.datalake_subscriber_java.extractors;
+package com.datalake.datalake_subscriber_java.services.mapper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.datalake.datalake_subscriber_java.utilities.JsonUtility;
 
 @Component
-public class VerdatDataExtractor {
+public class VerdatMapper {
 
     @Autowired
     private JsonUtility jsonUtility;
@@ -1122,7 +1122,7 @@ public class VerdatDataExtractor {
             return "0";
         }
         if (safePrincipalAmt == null) {
-            return "0"; 
+            return "0";
         }
         Long ltv = safePrincipalAmt / safeOtr;
         return Long.toString(ltv);

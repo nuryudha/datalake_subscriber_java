@@ -16,7 +16,7 @@ public class HelloController {
 
     @GetMapping("/")
     public String getMethodHello() {
-        return "Datalake Subscriber Java is Running!";
+        return "<div style='text-align: center; font-family: Arial; font-size: 36px; font-weight: bold;'>Datalake Subscriber Java is Running!</div>";
     }
 
     @GetMapping("/datalake/{order_id}")
