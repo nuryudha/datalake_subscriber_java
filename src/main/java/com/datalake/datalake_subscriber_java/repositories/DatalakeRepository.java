@@ -11,4 +11,6 @@ public interface DatalakeRepository extends JpaRepository<DatalakeEntity, Long> 
     @Query("SELECT COUNT(d) > 0 FROM DatalakeEntity d WHERE d.order_id = :order_id")
     boolean existsByOrder_id(@Param("order_id") String order_id);
 
+    @Query("SELECT d FROM DatalakeEntity d WHERE d.order_id = :order_id")
+    DatalakeEntity findByOrder_id(@Param("order_id") String order_id);
 }

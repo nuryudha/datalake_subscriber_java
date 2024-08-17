@@ -45,7 +45,6 @@ public class VerdatDataExtractor {
     private String occupation_type_code; // detail.debitur.personal.occupation.occupation_type_code
     private Map<String, Object> approval; // detail.approval
     private Map<String, Object> cetakan_po_sipbpkb_cl; // detail.cetakan_po_sipbpkb_cl
-    private Map<String, Object> aprroval; // detail.aprroval
     private Map<String, Object> first_approval_history; // detail.aprroval.approval_history[0]
     private Map<String, Object> first_identitas_order_internal_sales_force; // detail.identitas_order.internal_sales_force[0]
     private Map<String, Object> reguler_survey; // detail.reguler_survey
@@ -249,7 +248,7 @@ public class VerdatDataExtractor {
     public String getInterxtSalesForce2Name(Map<String, Object> map) {
         List<Map<String, Object>> external_sales_force = (List<Map<String, Object>>) informasi_aplikasi
                 .get("external_sales_force");
-        if (external_sales_force != null && !external_sales_force.isEmpty()) {
+        if (external_sales_force != null && external_sales_force.size() > 1) {
             this.second_external_sales_force = external_sales_force.get(1);
             return jsonUtility.getStringValue(second_external_sales_force, "external_sales_name");
         }
@@ -348,7 +347,7 @@ public class VerdatDataExtractor {
     }
 
     // detail.object_pembiayaan.supplier.unit_provider_code
-    public String getDlcgetDlc(Map<String, Object> map) {
+    public String getDlc(Map<String, Object> map) {
         this.supplier = jsonUtility.getNestedMap(object_pembiayaan, "supplier");
         return jsonUtility.getStringValue(supplier, "unit_provider_code");
     }
@@ -890,11 +889,11 @@ public class VerdatDataExtractor {
         return jsonUtility.getStringValue(cetakan_po_sipbpkb_cl, "print_date");
     }
 
-    // detail.aprroval.approval_history[0].note
+    // detail.approval.approval_history[0].note
     @SuppressWarnings("unchecked")
     public String getApproveNote(Map<String, Object> map) {
-        this.aprroval = jsonUtility.getNestedMap(detail, "aprroval");
-        List<Map<String, Object>> approval_history = (List<Map<String, Object>>) aprroval.get("approval_history");
+        this.approval = jsonUtility.getNestedMap(detail, "approval");
+        List<Map<String, Object>> approval_history = (List<Map<String, Object>>) approval.get("approval_history");
         if (approval_history != null && !approval_history.isEmpty()) {
             this.first_approval_history = approval_history.get(0);
             return jsonUtility.getStringValue(first_approval_history, "note");
@@ -924,6 +923,11 @@ public class VerdatDataExtractor {
         return "";
     }
 
+    // detail.identitas_order.internal_sales_force[0].internal_sales_head_name
+    public String getNamaCmh(Map<String, Object> map) {
+        return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_head_name");
+    }
+
     // detail.object_pembiayaan.calculation_structure_credit.type_installment_desc
     public String getInstallmentType(Map<String, Object> map) {
         return jsonUtility.getStringValue(calculation_structure_credit, "type_installment_desc");
@@ -950,7 +954,7 @@ public class VerdatDataExtractor {
     }
 
     // status_cancel
-    public String status_cancel(Map<String, Object> map) {
+    public String getStatusCancel(Map<String, Object> map) {
         // 'detail'->'cetakan_po_sipbpkb_cl'->>'flag_cancel' as CANCEL_POCL
         String cancelPocl = jsonUtility.getStringValue(cetakan_po_sipbpkb_cl, "flag_cancel");
         // 'detail'->'reguler_survey'->>'flag_reguler_survey' as CANCEL_REGULER,
@@ -1092,25 +1096,36 @@ public class VerdatDataExtractor {
     // contoh value : "total_principal_amount": "16819968",,
     // 'detail' -> 'object_pembiayaan' ->> 'obj_price' ) :: FLOAT AS OTR,
     // contoh value : "obj_price": "19118000",
-    public Long getLtv(Map<String, Object> map) {
-        Long appl_principal_amt = jsonUtility.getLongValue(calculation_structure_credit, "total_principal_amount");
-        Long otr = jsonUtility.getLongValue(object_pembiayaan, "obj_price");
-        Long safeOtr = null;
+    public String getLtv(Map<String, Object> map) {
+        String appl_principal_amt = jsonUtility.getStringValue(calculation_structure_credit,
+                "total_principal_amount");
+        String otr = jsonUtility.getStringValue(object_pembiayaan, "obj_price");
+        System.out.println("appl_principal_amt: " + appl_principal_amt);
+        System.out.println("otr: " + otr);
         Long safePrincipalAmt = null;
-        if (otr != null && otr != 0) {
-            safeOtr = otr;
+        Long safeOtr = null;
+        try {
+            if (appl_principal_amt != null && !appl_principal_amt.trim().isEmpty()) {
+                safePrincipalAmt = Long.valueOf(appl_principal_amt);
+            }
+        } catch (NumberFormatException e) {
+            safePrincipalAmt = null;
         }
-        if (appl_principal_amt != null && appl_principal_amt != 0) {
-            safePrincipalAmt = appl_principal_amt;
+        try {
+            if (otr != null && !otr.trim().isEmpty()) {
+                safeOtr = Long.valueOf(otr);
+            }
+        } catch (NumberFormatException e) {
+            safeOtr = null;
         }
-        if (safeOtr == null) {
-            return 0L;
+        if (safeOtr == null || safeOtr == 0) {
+            return "0";
         }
         if (safePrincipalAmt == null) {
-            return 0L;
+            return "0"; 
         }
         Long ltv = safePrincipalAmt / safeOtr;
-        return ltv;
+        return Long.toString(ltv);
     }
 
     // detail.reguler_survey.personal.informasi_nasabah.inf_debitur.inf_marital_desc
@@ -1282,7 +1297,7 @@ public class VerdatDataExtractor {
 
     }
 
-    public String getPortfolioDesc(String jenisChannelCode, String portfolioCode, String objPembiayaan) {
+    public String getPortfolioDesc(Map<String, Object> map) {
         String portfolio_code = obj_code;
         if (jenis_channel_code.equals("02")) {
             if (portfolio_code.equals("001") || portfolio_code.equals("002")) {
@@ -1375,7 +1390,7 @@ public class VerdatDataExtractor {
     }
 
     // nama_1
-    public String nama_1(Map<String, Object> map) {
+    public String getNama1(Map<String, Object> map) {
         return "";
     }
 
@@ -1386,6 +1401,11 @@ public class VerdatDataExtractor {
 
     // result_1
     public String getResult1(Map<String, Object> map) {
+        return "";
+    }
+
+    // date_1
+    public String getDate1(Map<String, Object> map) {
         return "";
     }
 
@@ -1815,7 +1835,7 @@ public class VerdatDataExtractor {
         return outlet_code + " - " + outlet_desc;
     }
 
-    public String getInternalSalesForce2Code() {
+    public String getInternalSalesForce2Code(Map<String, Object> map) {
         // 'detail' -> 'identitas_order' -> 'internal_sales_force' -> 0
         // ->>'internal_sales_type_code' as internal_sales_force_type_code
         this.internal_sales_force_type_code = jsonUtility.getStringValue(first_identitas_order_internal_sales_force,
@@ -1829,7 +1849,7 @@ public class VerdatDataExtractor {
         }
     }
 
-    public String internal_sales_force2_nik() {
+    public String getInternalSalesForce2Nik(Map<String, Object> map) {
         if (internal_sales_force_type_code.equals("6")) {
             // detail.identitas_order.internal_sales_force[0].internal_sales_force_id
             return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_force_id");
@@ -1838,7 +1858,7 @@ public class VerdatDataExtractor {
         }
     }
 
-    public String getInternalSalesForce2Name() {
+    public String getInternalSalesForce2Name(Map<String, Object> map) {
         if (internal_sales_force_type_code.equals("6")) {
             // detail.identitas_order.internal_sales_force[0].internal_sales_force_desc
             return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_force_desc");
@@ -1847,7 +1867,7 @@ public class VerdatDataExtractor {
         }
     }
 
-    public String getInternalSalesForce2Job() {
+    public String getInternalSalesForce2Job(Map<String, Object> map) {
         if (internal_sales_force_type_code.equals("6")) {
             // detail.identitas_order.internal_sales_force[0].internal_sales_job_desc
             return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_job_desc");

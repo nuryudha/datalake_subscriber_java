@@ -3,166 +3,220 @@
 PRODUCER
 topic: test-datalake
 {
-"Message":{
-  "detail": {
-    "debitur": {
-      "personal": {
-        "email": "Mar@gmail.com",
-        "no_ktp": "1503056005790001",
-        "no_hp_1": "085268544532",
-        "no_hp_2": "",
-        "foto_ktp": "",
-        "tempat_lahir": "GUNUNG KIDUL",
-        "jenis_kelamin": "P",
-        "tanggal_lahir": "20-MAY-1979",
-        "alamat_debitur": {
-          "alamat_ktp": {
-            "rt": "011",
-            "rw": "000",
-            "alamat": "PULAU REMBAN",
-            "kode_pos": "37481",
-            "desc_kab_kot": "KAB. SAROLANGUN",
-            "kode_kab_kot": "3104",
-            "desc_provinsi": "PROVINSI JAMBI",
-            "kode_provinsi": "31",
-            "desc_kecamatan": "SAROLANGUN",
-            "desc_kelurahan": "SUKASARI",
-            "kode_kecamatan": "12361",
-            "kode_kelurahan": "C0936"
+  "Message": {
+    "order_id": "17",
+    "current_form_desc": "Form E",
+    "application_id": "APP78910",
+    "application_date": "2024-08-17",
+    "order_created_date": "2024-08-16",
+    "contract_id": [
+      {
+        "contract_id": "CONTRACT001"
+      }
+    ],
+    "approval_max_level": "5",
+    "approval_last_level": "3",
+    "deviasi": {
+      "max_deviasi": "10"
+    },
+    "detail": {
+      "identitas_order": {
+        "financing_type_desc": "Credit",
+        "mkt_product_desc": "Product X",
+        "debitur_area_branch_desc": "Branch A",
+        "outlet_desc": "Outlet 1",
+        "internal_sales_force": [
+          {
+            "internal_sales_force_npk": "NP123",
+            "internal_sales_force_id": "ID123",
+            "internal_sales_force_desc": "Sales Force A",
+            "internal_sales_job_desc": "Sales Manager",
+            "internal_sales_bank_acc_no": "BANK123456"
           }
+        ],
+        "external_sales_force": [
+          {
+            "external_sales_name": "John Doe",
+            "external_sales_npk": "EX123",
+            "external_sales_job_desc": "External Sales A",
+            "external_sales_no": "EXT001"
+          },
+          {
+            "external_sales_name": "Jane Smith",
+            "external_sales_npk": "EX124",
+            "external_sales_job_desc": "External Sales B",
+            "external_sales_no": "EXT002"
+          }
+        ]
+      },
+      "data_entry_completion": {
+        "aplikasi": {
+          "objek_jaminan": [
+            {
+              "struktur_kredit": {
+                "type_installment_code": "INST01",
+                "total_principal_amount": "2",
+                "tenor": "12",
+                "gross_dp": "50000",
+                "nett_dp": "45000",
+                "resiko_jaminan_cabang": "High",
+                "flat_rate": "5",
+                "eff_rate": "4.5",
+                "installment_amount": "85000"
+              },
+              "detail_objek_jaminan": {
+                "automotive": {
+                  "obj_code": "AUTO123",
+                  "obj_desc": "Car Description",
+                  "obj_brand_code": "BRAND01",
+                  "obj_brand_desc": "Brand A",
+                  "obj_type_code": "TYPE01",
+                  "obj_type_desc": "SUV",
+                  "obj_model_code": "MODEL01",
+                  "obj_model_desc": "Model A",
+                  "obj_year": "2024",
+                  "obj_color": "Red",
+                  "no_mesin": "ENG123456",
+                  "no_rangka": "FRAME123456",
+                  "nama_bpkb": "BPKB001"
+                }
+              }
+            }
+          ],
+          "informasi_aplikasi": {
+            "internal_sales_force": [
+              {
+                "internal_sales_force_npk": "NP123",
+                "internal_sales_force_id": "ID123",
+                "internal_sales_force_desc": "Sales Force A",
+                "internal_sales_job_desc": "Sales Manager",
+                "external_sales_no": "EXT001"
+              }
+            ],
+            "external_sales_force": [
+              {
+                "external_sales_name": "John Doe",
+                "external_sales_npk": "EX123",
+                "external_sales_job_desc": "External Sales A",
+                "external_sales_no": "EXT001"
+              }
+            ]
+          }
+        }
+      },
+      "object_pembiayaan": {
+        "total_principal_amount": "16819968",
+        "obj_price": "1",
+        "supplier": {
+          "unit_provider_code": "PROV001",
+          "unit_provider_desc": "Provider A",
+          "rekening_package_code": "REK001",
+          "rekening_package_desc": "Package A"
         },
-        "area_branch_id": "0010",
-        "area_branch_desc": "AREA SUMBAGSEL",
-        "status_perkawinan": "01",
-        "status_perkawinan_desc": "KAWIN"
+        "calculation_structure_credit": {
+          "total_principal_amount": "2",
+          "admin_total_fee": "5000",
+          "admin_credit_fee": "3000",
+          "admin_fee": "2000",
+          "provisi_fee": "1000",
+          "provisi_credit_fee": "500"
+        },
+        "calculation_insurance": {
+          "insurance_total_fee": "1500",
+          "insurance_credit_fee": "1000",
+          "insurance_fee": "500",
+          "nett_rate_insurance": "2"
+        },
+        "calculation_additional_insurance": {
+          "additional_insurance_credit_fee": "200",
+          "additional_insurance_fee": "100"
+        },
+        "obj_fuel_desc": "Petrol",
+        "obj_model_group_code": "MG01",
+        "obj_model_group_desc": "Group A",
+        "type_genre_desc": "SUV",
+        "obj_year": "2024"
+      },
+      "reguler_survey": {
+        "personal": {
+          "informasi_object_pembiayaan": {
+            "bayar_angsuran_desc": "Monthly",
+            "bank_desc": "Bank A"
+          },
+          "informasi_nasabah": {
+            "inf_debitur": {
+              "inf_marital_desc": "Married"
+            }
+          }
+        }
+      },
+      "approval": {
+        "last_approval_date": "2024-08-15",
+        "approval_status": "Approved",
+        "approval_history": [
+          {
+            "note": "Initial approval",
+            "nik": "NIK123",
+            "name": "Approver A"
+          }
+        ]
+      },
+      "cetakan_po_sipbpkb_cl": {
+        "print_date": "2024-08-16",
+        "flag_cancel": "false"
+      },
+      "detail_identitas_order": {
+        "internal_sales_force": [
+          {
+            "internal_sales_head_id": "HEAD123",
+            "internal_sales_head_name": "Head Sales A"
+          }
+        ]
+      },
+      "applicant_type_desc": "Individual",
+      "customer_no": "CUS123456",
+      "customer_name": "Alice Doe",
+      "debitur": {
+        "personal": {
+          "debitur_area_branch_desc": "Branch A",
+          "debitur_jenis_kelamin": "Female",
+          "alamat_debitur": {
+            "alamat_ktp": {
+              "alamat": "Jl. Example",
+              "rt": "01",
+              "rw": "02",
+              "kode_pos": "12345",
+              "desc_kelurahan": "Kelurahan A",
+              "desc_kecamatan": "Kecamatan A",
+              "desc_kab_kot": "Kota A",
+              "desc_provinsi": "Provinsi A"
+            },
+            "occupation": {
+              "debitur_name_of_workplace": "Company A",
+              "debitur_company_type_desc": "Private",
+              "debitur_economic_sector_one_desc": "Retail",
+              "debitur_economic_sector_two_desc": "Wholesale",
+              "debitur_economic_sector_three_desc": "Distribution",
+              "debitur_total_working_time_year": "10",
+              "debitur_employee_status_desc": "Full-time",
+              "debitur_location_desc": "City A",
+              "debitur_total_pegawai": "50"
+            }
+          }
+        }
       }
     },
-    "identitas_order": {
-      "internal_sales_force": [
-        {
-          "internal_sales_hp_no": "085218522530",
-          "internal_sales_com_br": "0613",
-          "internal_sales_head_id": "19013312",
-          "internal_sales_head_no": "2300008743",
-          "internal_sales_com_code": "MUF",
-          "internal_sales_force_id": "21017893",
-          "internal_sales_force_no": "2300008655",
-          "internal_sales_head_npk": "0013",
-          "internal_sales_job_code": "CMO",
-          "internal_sales_job_desc": "CREDIT MARKETING OFFICER",
-          "internal_sales_bank_code": "",
-          "internal_sales_force_npk": "000S",
-          "internal_sales_head_name": "HADI SAPUTRA",
-          "internal_sales_type_code": "1",
-          "internal_sales_type_desc": "INTERNAL SALES 1",
-          "internal_sales_force_desc": "PAHMI  RIDO",
-          "internal_sales_bank_acc_no": "",
-          "internal_sales_head_job_code": "CMH",
-          "internal_sales_head_job_desc": "CREDIT MARKETING HEAD"
-        }
-      ],
-      "financing_type_desc": "KONVENSIONAL1"
-    },
-    "object_pembiayaan": {
-      "tenor": 0,
-      "max_loan": "0",
-      "obj_code": "004",
-      "obj_desc": "MOBIL BEKAS",
-      "obj_fuel": "",
-      "obj_year": "",
-      "obj_price": 0,
-      "obj_wheel": "",
-      "type_code": "",
-      "type_desc": "",
-      "brand_code": "",
-      "brand_desc": "",
-      "model_code": "",
-      "model_desc": "",
-      "down_payment": 0,
-      "eng_capacity": "",
-      "obj_made_code": "",
-      "obj_made_desc": "",
-      "sub_type_code": "",
-      "sub_type_desc": "",
-      "obj_group_code": "002",
-      "obj_group_desc": "MOBIL",
-      "disburse_amount": 0,
-      "type_genre_code": "",
-      "type_genre_desc": "",
-      "obj_market_price": 0,
-      "installment_amount": 0,
-      "obj_insr_group_code": "",
-      "obj_insr_group_desc": "",
-      "obj_model_group_code": "",
-      "obj_model_group_desc": "",
-      "total_installment_amount": 0
-    },
-    "status_entry_form_manual": {
-      "insert_by": "21017893",
-      "insert_date": "2024/03/21 10:04:35"
-    }
-  },
-  "deviasi": {
-        "max_deviasi": 12,
-        "detail_deviasi": []
-      },
-  "order_id": "11",
-  "pk_payung": "",
-  "prioritas": 1,
-  "appl_va_no": [],
-  "order_mode": "00",
-  "promo_code": "",
-  "branch_code": "0613",
-  "branch_desc": "MUARA BUNGO",
-  "contract_id": [],
-  "screening_1": "NON IND IA-NORESPON",
-  "screening_2": "",
-  "screening_3": "",
-  "channel_code": "01",
-  "channel_desc": "DEALER/SHOWROOM",
-  "grading_slik": "NO RESPONSE",
-  "customer_name": "MARTIAH",
-  "flag_trade_in": "N",
-  "application_id": "",
-  "flag_marketing": "Y",
-  "flag_order_type": "ND",
-  "application_date": "",
-  "flag_data_format": "",
-  "grading_employee": "GREEN",
-  "insurance_com_id": "",
-  "mkt_program_code": "",
-  "mkt_program_desc": "",
-  "order_created_by": "21017893",
-  "scoring_dukcapil": "88",
-  "screening_1_date": "2024/03/21 10:05:54",
-  "screening_2_date": "",
-  "screening_3_date": "",
-  "source_form_code": "EFMAL",
-  "source_form_desc": "ENTRY FORM MANUAL",
-  "current_form_code": "EFMAL",
-  "current_form_desc": "ENTRY FORM MANUAL",
-  "purchase_order_id": "",
-  "source_order_code": "02",
-  "source_order_desc": "MUFSURVEY",
-  "customer_behaviour": "NEW CUSTOMER",
-  "customer_type_code": "03",
-  "customer_type_desc": "Tidak",
-  "financing_obj_code": "FO01",
-  "financing_obj_desc": "KENDARAAN",
-  "insurance_com_desc": "",
-  "order_created_date": "2024/03/21 10:04:35",
-  "status_assign_code": "03",
-  "status_assign_desc": "ENTRY MANUAL",
-  "applicant_type_code": "PER",
-  "applicant_type_desc": "PERSONAL",
-  "kelengkapan_dokumen": "LENGKAP",
-  "outlet_channel_code": "00K054",
-  "outlet_channel_desc": "HAZWAR MOTOR",
-  "grading_dealer_mitra": "GOLD 1",
-  "confirmation_letter_id": "",
-  "grading_customer_category": "NEW"
+    "source_order_desc": "Order Source A",
+    "screening_1_date": "2024-08-01",
+    "screening_2_date": "2024-08-05",
+    "screening_3_date": "2024-08-10",
+    "reguler_survey_created_date": "2024-08-15",
+    "grading_customer_category": "Gold"
+  }
 }
-}
+
+
+
 
 
 

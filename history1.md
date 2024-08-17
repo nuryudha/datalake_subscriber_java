@@ -7,10 +7,8 @@
         return getStringValue(message, "order_id");
     }
 
-
-   
-   // @SuppressWarnings("unchecked")
-    // private String getDebiturAreaBranchDesc(Map<String, Object> map) {
+// @SuppressWarnings("unchecked")
+// private String getDebiturAreaBranchDesc(Map<String, Object> map) {
 
     // Map<String, Object> message = (Map<String, Object>) map.get("Message");
     // if (message == null)
@@ -38,4 +36,4 @@
 
     Untuk Log aja
     No order sama current form untuk log waktu consume
-    waktu update sudah update data no ordrernya
+    waktu update, sudah update data, no ordrernya
