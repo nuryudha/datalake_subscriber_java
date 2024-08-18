@@ -55,4 +55,22 @@ public class JsonUtility {
         return currentMap;
     }
 
+    public String regexCleaner(String custAddress) {
+        // Mengganti karakter carriage return (\r), line feed (\n), dan tab (\t) dengan
+        // string kosong
+        return custAddress.replaceAll("[\r\n\t]", "");
+    }
+
+    // Helper method untuk mengonversi String ke Long, mengembalikan null jika gagal
+    public Long parseLongOrNull(String value) {
+        if (value != null && !value.trim().isEmpty()) {
+            try {
+                return Long.valueOf(value);
+            } catch (NumberFormatException e) {
+                // Log exception jika perlu
+            }
+        }
+        return null;
+    }
+
 }

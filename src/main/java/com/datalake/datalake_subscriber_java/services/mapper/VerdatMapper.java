@@ -56,7 +56,14 @@ public class VerdatMapper {
     private String jenis_channel_code; // 'detail' -> 'identitas_order' ->> 'jenis_channel_code' AS jenis_channel_code,
     private String internal_sales_force_type_code; // 'detail' -> 'identitas_order' -> 'internal_sales_force' -> 0
                                                    // ->>'internal_sales_type_code' as internal_sales_force_type_code
-
+    private String CSC_total_principal_amount; // detail.object_pembiayaan.calculation_structure_credit.total_principal_amount
+    private String CSC_total_interest_amount; // detail.object_pembiayaan.calculation_structure_credit.total_interest_amount
+    private String CAI_additional_insurance_credit_fee; // detail.object_pembiayaan.calculation_additional_insurance.additional_insurance_credit_fee
+    private String CAI_additional_insurance_fee; // detail.object_pembiayaan.calculation_additional_insurance.additional_insurance_fee
+    private String CAI_provisi_fee; // detail.object_pembiayaan.calculation_structure_credit.provisi_fee AS
+                                    // provisi_paid
+    private String CAI_provisi_credit_fee; // detail.object_pembiayaan.calculation_structure_credit.provisi_credit_fee
+                                           // AS PROVISI_FIN
     // ? NEW
 
     // order_id = order_id
@@ -573,7 +580,18 @@ public class VerdatMapper {
 
     // prin_plus_intr_amount (perhitungan)
     public String getPrinPlusIntrAmount(Map<String, Object> map) {
-        return "";
+        // detail.object_pembiayaan.calculation_structure_credit.total_principal_amount
+        this.CSC_total_principal_amount = jsonUtility.getStringValue(calculation_structure_credit,
+                "total_principal_amount");
+        // detail.object_pembiayaan.calculation_structure_credit.total_interest_amount
+        this.CSC_total_interest_amount = jsonUtility.getStringValue(calculation_structure_credit,
+                "total_interest_amount");
+        Long appl_principal_amt = jsonUtility.parseLongOrNull(CSC_total_principal_amount);
+        Long total_interest_amount = jsonUtility.parseLongOrNull(CSC_total_interest_amount);
+        Long safePrincipalAmt = (appl_principal_amt != null) ? appl_principal_amt : 0L;
+        Long safeInterestAmt = (total_interest_amount != null) ? total_interest_amount : 0L;
+        Long result = safePrincipalAmt + safeInterestAmt;
+        return Long.toString(result);
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.tenor
@@ -659,34 +677,68 @@ public class VerdatMapper {
 
     // tot_ins_fee2 (perhitungan)
     public String getTotInsFee2(Map<String, Object> map) {
-        return "";
+        // 'detail' -> 'object_pembiayaan' -> 'calculation_additional_insurance' ->>
+        // 'additional_insurance_credit_fee' )
+        this.calculation_additional_insurance = jsonUtility.getNestedMap(object_pembiayaan,
+                "calculation_additional_insurance");
+        this.CAI_additional_insurance_credit_fee = jsonUtility.getStringValue(calculation_additional_insurance,
+                "additional_insurance_credit_fee");
+        String objtInsrFinancing2Str = CAI_additional_insurance_credit_fee;
+        // 'detail' -> 'object_pembiayaan' -> 'calculation_additional_insurance' ->>
+        // 'additional_insurance_fee' AS PAID_INSR_FEE2
+        this.CAI_additional_insurance_fee = jsonUtility.getStringValue(calculation_additional_insurance,
+                "additional_insurance_fee");
+        String additionalInsuranceFeeStr = CAI_additional_insurance_fee;
+
+        Long objtInsrFinancing2 = jsonUtility.parseLongOrNull(objtInsrFinancing2Str);
+        Long additionalInsuranceFee = jsonUtility.parseLongOrNull(additionalInsuranceFeeStr);
+
+        Long safeInsurance1 = (objtInsrFinancing2 != null) ? objtInsrFinancing2 : 0L;
+        Long safeInsurance2 = (additionalInsuranceFee != null) ? additionalInsuranceFee : 0L;
+
+        Long result = safeInsurance1 + safeInsurance2;
+        return Long.toString(result);
     }
 
     // detail.object_pembiayaan.calculation_additional_insurance.additional_insurance_credit_fee
     public String getObjtInsrFinancing2(Map<String, Object> map) {
-        this.calculation_additional_insurance = jsonUtility.getNestedMap(object_pembiayaan,
-                "calculation_additional_insurance");
-        return jsonUtility.getStringValue(calculation_additional_insurance, "additional_insurance_credit_fee");
+        return CAI_additional_insurance_credit_fee;
     }
 
     // detail.object_pembiayaan.calculation_additional_insurance.additional_insurance_fee
     public String getPaidInsrFee2(Map<String, Object> map) {
-        return jsonUtility.getStringValue(calculation_additional_insurance, "additional_insurance_fee");
+        return CAI_additional_insurance_fee;
     }
 
     // total_provisi (perhitungan)
     public String getTotalProvisi(Map<String, Object> map) {
-        return "";
+        // detail.object_pembiayaan.calculation_structure_credit.provisi_fee AS
+        // provisi_paid
+        this.CAI_provisi_fee = jsonUtility.getStringValue(calculation_structure_credit, "provisi_fee");
+        String provisi_paid = CAI_provisi_fee;
+        // detail.object_pembiayaan.calculation_structure_credit.provisi_credit_fee AS
+        // PROVISI_FIN
+        this.CAI_provisi_credit_fee = jsonUtility.getStringValue(calculation_structure_credit, "provisi_credit_fee");
+        String provisi_fin = CAI_provisi_credit_fee;
+
+        Long provisiPaid = jsonUtility.parseLongOrNull(provisi_paid);
+        Long provisiFin = jsonUtility.parseLongOrNull(provisi_fin);
+
+        Long safeProvisiPaid = (provisiPaid != null) ? provisiPaid : 0L;
+        Long safeProvisiFin = (provisiFin != null) ? provisiFin : 0L;
+
+        Long result = safeProvisiPaid + safeProvisiFin;
+        return Long.toString(result);
     }
 
     // detail.object_pembiayaan.calculation_structure_credit.provisi_fee
     public String getProvisiPaid(Map<String, Object> map) {
-        return jsonUtility.getStringValue(calculation_structure_credit, "provisi_fee");
+        return CAI_provisi_fee;
     }
 
     // detail.object_pembiayaan.calculation_structure_credit.provisi_credit_fee
     public String getProvisiFin(Map<String, Object> map) {
-        return jsonUtility.getStringValue(calculation_structure_credit, "provisi_credit_fee");
+        return CAI_provisi_credit_fee;
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.installment_amount
@@ -750,11 +802,11 @@ public class VerdatMapper {
     }
 
     // detail.debitur.personal.alamat_debitur.alamat_ktp.alamat
-    // ! (regex)
     public String getCustAddress(Map<String, Object> map) {
         Map<String, Object> alamat_debitur = jsonUtility.getNestedMap(personal, "alamat_debitur");
         this.alamat_ktp = jsonUtility.getNestedMap(alamat_debitur, "alamat_ktp");
-        return jsonUtility.getStringValue(alamat_ktp, "alamat");
+        String alamat = jsonUtility.getStringValue(alamat_ktp, "alamat");
+        return jsonUtility.regexCleaner(alamat);
 
     }
 
@@ -1958,7 +2010,7 @@ public class VerdatMapper {
 
     // detail.object_pembiayaan.calculation_structure_credit.total_interest_amount
     public String getTotalInterestAmount(Map<String, Object> map) {
-        return jsonUtility.getStringValue(calculation_structure_credit, "total_interest_amount");
+        return CSC_total_interest_amount;
     }
 
     // detail.object_pembiayaan.calculation_insurance.insurance_credit_fee
