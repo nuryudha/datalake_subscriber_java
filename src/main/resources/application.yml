@@ -22,7 +22,13 @@ spring:
     password: admin
     driver-class-name: org.postgresql.Driver
 
+  # datasource:
+  #   url: jdbc:postgresql://10.22.15.124:5432/reporting?assumeMinServerVersion=9.4?ApplicationName=datalake_report
+  #   username: dev_revamp
+  #   password: dev_2021
+  #   driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    # show-sql: true

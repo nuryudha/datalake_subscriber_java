@@ -25,7 +25,7 @@ public class DatalakeEntity {
     private String appl_contract_no;
     private String max_approval;
     private String last_approval;
-    private String max_deviasi;
+    private Long max_deviasi;
     private String appl_ppd_date;
     private String fin_type;
     private String finance_product;

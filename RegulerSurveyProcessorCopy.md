@@ -1,24 +1,38 @@
 package com.datalake.datalake_subscriber_java.processors;
 
-import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.google.gson.Gson;
+
 import com.datalake.datalake_subscriber_java.entities.DatalakeEntity;
 import com.datalake.datalake_subscriber_java.repositories.DatalakeRepository;
+import com.datalake.datalake_subscriber_java.services.binding.RegulerSurveyBinder;
+import com.datalake.datalake_subscriber_java.services.mapper.RegulerSurveyMapper;
+import com.datalake.datalake_subscriber_java.utilities.JsonUtility;
 
 @Component("test-datalake")
 public class RegulerSurveyProcessor implements TopicProcessor {
 
     @Autowired
+    private static Logger logger = LoggerFactory.getLogger(VerdatProcessor.class);
+
+    @Autowired
     private DatalakeRepository datalakeRepository;
 
+    @Autowired
+    private JsonUtility jsonUtility;
+
+    @Autowired
+    private RegulerSurveyMapper regulerSurveyMapper;
+
+    @Autowired
+    private RegulerSurveyBinder regulerSurveyBinder;
+
     @Override
-    @Transactional
+    // @Transactional
     public void process(String message) {
         Map<String, Object> gsonMessage = parseMessage(message);
 
