@@ -14,7 +14,9 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     topic:
-      listTopic: test-datalake
+      test-datalake: test-datalake
+      test-regsur: test-regsur
+      test-verdat: test-verdat
 
   datasource:
     url: jdbc:postgresql://localhost:5432/datalake

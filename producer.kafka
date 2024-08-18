@@ -1,7 +1,7 @@
 
 
 PRODUCER
-topic: test-datalake
+topic: test-verdat
 {
   "Message": {
     "order_id": "17",
