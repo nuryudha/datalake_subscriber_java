@@ -64,6 +64,7 @@ public class VerdatMapper {
                                     // provisi_paid
     private String CAI_provisi_credit_fee; // detail.object_pembiayaan.calculation_structure_credit.provisi_credit_fee
                                            // AS PROVISI_FIN
+    private Map<String, Object> DEC_occupation_debitur; // detail.data_entry_completion.customer.occupation.debitur
     // ? NEW
 
     // order_id = order_id
@@ -652,7 +653,7 @@ public class VerdatMapper {
     // detail.object_pembiayaan.calculation_insurance.insurance_total_fee
     public String getApplTotInsFee(Map<String, Object> map) {
         this.calculation_insurance = jsonUtility.getNestedMap(object_pembiayaan, "calculation_insurance");
-        return jsonUtility.getStringValue(calculation_insurance, "eff_rate");
+        return jsonUtility.getStringValue(calculation_insurance, "insurance_total_fee");
     }
 
     // detail.object_pembiayaan.calculation_insurance.insurance_credit_fee
@@ -879,11 +880,13 @@ public class VerdatMapper {
 
     // occupation_type : detail.debitur.personal.occupation.occupation_type_code
     public String getCustCurrYearOfWork(Map<String, Object> map) {
-        Map<String, Object> occupation = jsonUtility.getNestedMap(personal, "occupation");
         this.occupation_type_code = jsonUtility.getStringValue(occupation, "occupation_type_code");
         if (occupation_type_code.equals("01")) {
             // detail.data_entry_completion.customer.occupation.debitur.debitur_total_working_time_year
-            return jsonUtility.getStringValue(occupationDebitur, "debitur_total_working_time_year");
+            Map<String, Object> customer = jsonUtility.getNestedMap(data_entry_completion, "customer");
+            Map<String, Object> occupation = jsonUtility.getNestedMap(customer, "occupation");
+            this.DEC_occupation_debitur = jsonUtility.getNestedMap(occupation, "debitur");
+            return jsonUtility.getStringValue(DEC_occupation_debitur, "debitur_total_working_time_year");
         } else {
             return "";
         }
@@ -891,24 +894,24 @@ public class VerdatMapper {
 
     // detail.data_entry_completion.customer.occupation.debitur.debitur_employee_status_desc
     public String getComStatusTempat(Map<String, Object> map) {
-        return jsonUtility.getStringValue(occupationDebitur, "debitur_employee_status_desc");
+        return jsonUtility.getStringValue(DEC_occupation_debitur, "debitur_employee_status_desc");
     }
 
     // detail.data_entry_completion.customer.occupation.debitur.debitur_location_desc
     public String getComLokasiUsaha(Map<String, Object> map) {
-        return jsonUtility.getStringValue(occupationDebitur, "debitur_location_desc");
+        return jsonUtility.getStringValue(DEC_occupation_debitur, "debitur_location_desc");
     }
 
     // detail.data_entry_completion.customer.occupation.debitur.debitur_total_pegawai
     public String getComTotalEmployee(Map<String, Object> map) {
-        return jsonUtility.getStringValue(occupationDebitur, "debitur_total_pegawai");
+        return jsonUtility.getStringValue(DEC_occupation_debitur, "debitur_total_pegawai");
     }
 
     // occupation_type : detail.debitur.personal.occupation.occupation_type_code
     public String getComNoOfYearBuss(Map<String, Object> map) {
         if (occupation_type_code.equals("02")) {
             // detail.data_entry_completion.customer.occupation.debitur.debitur_total_working_time_year
-            return jsonUtility.getStringValue(occupationDebitur, "debitur_total_working_time_year");
+            return jsonUtility.getStringValue(DEC_occupation_debitur, "debitur_total_working_time_year");
         } else {
             return "";
         }
@@ -1189,6 +1192,7 @@ public class VerdatMapper {
     }
 
     // detail.debitur.personal.debitur_education_desc
+
     public String getEducation(Map<String, Object> map) {
         return jsonUtility.getStringValue(personal, "debitur_education_desc");
     }
@@ -1271,11 +1275,18 @@ public class VerdatMapper {
     }
 
     // detail.data_entry_completion.survey.data_kepemilikan.detail_rumah.year_of_living
+    // (VERDAT)
+    // detail.reguler_survey.personal.informasi_survey.data_informan.[0].deb_tinggal_tahun
+    @SuppressWarnings("unchecked")
     public String getLamaTinggal(Map<String, Object> map) {
-        Map<String, Object> survey = jsonUtility.getNestedMap(data_entry_completion, "survey");
-        Map<String, Object> data_kepemilikan = jsonUtility.getNestedMap(survey, "data_kepemilikan");
-        Map<String, Object> detail_rumah = jsonUtility.getNestedMap(data_kepemilikan, "detail_rumah");
-        return jsonUtility.getStringValue(detail_rumah, "year_of_living");
+        Map<String, Object> informasi_survey = jsonUtility.getNestedMap(personal, "informasi_survey");
+        List<Map<String, Object>> data_informan = (List<Map<String, Object>>) informasi_survey
+                .get("data_informan");
+        if (data_informan != null && !data_informan.isEmpty()) {
+            Map<String, Object> first_data_informan = data_informan.get(0);
+            return jsonUtility.getStringValue(first_data_informan, "deb_tinggal_tahun");
+        }
+        return "";
     }
 
     // bal_prin

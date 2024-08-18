@@ -199,87 +199,80 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0].internal_sales_force_npk
-    @SuppressWarnings("unchecked")
+    // (VERDAT)
+    // detail.identitas_order.internal_sales_force[0].internal_sales_force_npk
     public String getInternalSalesForceCode(Map<String, Object> map) {
-        this.data_entry_completion = jsonUtility.getNestedMap(detail, "data_entry_completion");
-        this.aplikasi = jsonUtility.getNestedMap(data_entry_completion, "aplikasi");
-        this.informasi_aplikasi = jsonUtility.getNestedMap(aplikasi, "informasi_aplikasi");
-        List<Map<String, Object>> internal_sales_force = (List<Map<String, Object>>) informasi_aplikasi
-                .get("internal_sales_force");
-        if (internal_sales_force != null && !internal_sales_force.isEmpty()) {
-            this.first_internal_sales_force = internal_sales_force.get(0);
-            return jsonUtility.getStringValue(first_internal_sales_force, "internal_sales_force_npk");
-        }
-        return "";
+        return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_force_id");
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0].internal_sales_force_id
+    // (VERDAT)
+    // detail.identitas_order.internal_sales_force[0].internal_sales_force_id
     public String getInternalSalesForceNik(Map<String, Object> map) {
-        return jsonUtility.getStringValue(first_internal_sales_force, "internal_sales_force_id");
+        return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_force_id");
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0].internal_sales_force_desc
+    // (VERDAT)
+    // detail.identitas_order.internal_sales_force[0].internal_sales_force_desc
     public String getInternalSalesForceName(Map<String, Object> map) {
-        return jsonUtility.getStringValue(first_internal_sales_force, "internal_sales_force_desc");
+        return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_force_desc");
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0].internal_sales_job_desc
+    // (VERDAT)
+    // detail.identitas_order.internal_sales_force[0].internal_sales_job_desc
     public String getInternalSalesForceJob(Map<String, Object> map) {
-        return jsonUtility.getStringValue(first_internal_sales_force, "internal_sales_job_desc");
+        return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_job_desc");
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[0].external_sales_name
-    @SuppressWarnings("unchecked")
+    // (VERDAT)
+    // interxt_sales_force1_name ("")
     public String getInterxtSalesForce1Name(Map<String, Object> map) {
-        List<Map<String, Object>> external_sales_force = (List<Map<String, Object>>) informasi_aplikasi
-                .get("external_sales_force");
-        if (external_sales_force != null && !external_sales_force.isEmpty()) {
-            this.first_external_sales_force = external_sales_force.get(0);
-            return jsonUtility.getStringValue(first_external_sales_force, "external_sales_name");
-        }
         return "";
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[0].external_sales_npk
+    // (VERDAT)
+    // interxt_sales_force1_npk ("")
     public String getInterxtSalesForce1Npk(Map<String, Object> map) {
-        return jsonUtility.getStringValue(first_external_sales_force, "external_sales_npk");
+        return "";
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[0].external_sales_job_desc
+    // (VERDAT)
+    // interxt_sales_force1_job ("")
     public String getInterxtSalesForce1Job(Map<String, Object> map) {
-        return jsonUtility.getStringValue(first_external_sales_force, "external_sales_job_desc");
+        return "";
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[1].external_sales_name
-    @SuppressWarnings("unchecked")
+    // (VERDAT)
+    // interxt_sales_force2_name ("")
     public String getInterxtSalesForce2Name(Map<String, Object> map) {
-        List<Map<String, Object>> external_sales_force = (List<Map<String, Object>>) informasi_aplikasi
-                .get("external_sales_force");
-        if (external_sales_force != null && external_sales_force.size() > 1) {
-            this.second_external_sales_force = external_sales_force.get(1);
-            return jsonUtility.getStringValue(second_external_sales_force, "external_sales_name");
-        }
         return "";
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[1].external_sales_npk
+    // (VERDAT)
+    // interxt_sales_force2_npk ("")
     public String getInterxtSalesForce2Npk(Map<String, Object> map) {
-        return jsonUtility.getStringValue(second_external_sales_force, "external_sales_npk");
+        return "";
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[1].external_sales_job_desc
+    // (VERDAT)
+    // interxt_sales_force2_job ("")
     public String getInterxtSalesForce2Job(Map<String, Object> map) {
-        return jsonUtility.getStringValue(second_external_sales_force, "external_sales_job_desc");
+        return "";
     }
 
     // 'detail' -> 'identitas_order' -> 'external_sales_force' -> 0->>
-    // 'external_sales_no'
+    // 'external_sales_no' (VERDAT)
+    // id_empl_mitra ("")
     public String getIdEmplMitra(Map<String, Object> map) {
-        if (appl_sales_through == "03") {
-            return jsonUtility.getStringValue(first_external_sales_force, "external_sales_no");
-        } else {
-            return "";
-        }
+        return "";
     }
 
     // channel_desc
@@ -289,13 +282,10 @@ public class RegulerSurveyMapper {
     }
 
     // 'detail' -> 'identitas_order' -> 'external_sales_force' -> 0->>
-    // 'external_sales_no'
+    // 'external_sales_no' (VERDAT)
+    // empl_nik_bank ("")
     public String getEmplNikBank(Map<String, Object> map) {
-        if (appl_sales_through == "02") {
-            return jsonUtility.getStringValue(first_external_sales_force, "external_sales_no");
-        } else {
-            return "";
-        }
+        return "";
     }
 
     // no_telephone
@@ -318,13 +308,12 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[0].external_sales_job_code
+    // (VERDAT)
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[0].external_sales_job_desc
+    // (VERDAT)
+    // kode_pekerjaan ("")
     public String getKodePekerjaan(Map<String, Object> map) {
-        String external_sales_job_code = jsonUtility.getStringValue(first_external_sales_force,
-                "external_sales_job_code");
-        String external_sales_job_desc = jsonUtility.getStringValue(first_external_sales_force,
-                "external_sales_job_desc");
-        return external_sales_job_code + external_sales_job_desc;
+        return "";
 
     }
 
@@ -344,8 +333,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0].internal_sales_bank_acc_no
+    // (VERDAT)
+    // detail.identitas_order.internal_sales_force[0].internal_sales_bank_acc_no
     public String getEmplAccNo(Map<String, Object> map) {
-        return jsonUtility.getStringValue(first_internal_sales_force, "internal_sales_bank_acc_no");
+        return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_bank_acc_no");
     }
 
     // empl_addr ("")
@@ -400,32 +391,30 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_code
-    @SuppressWarnings("unchecked")
+    // (VERDAT)
+    // detail.object_pembiayaan.obj_code
     public String getApplObjtCode(Map<String, Object> map) {
-        List<Map<String, Object>> objek_jaminan = (List<Map<String, Object>>) aplikasi.get("objek_jaminan");
-        if (objek_jaminan != null && !objek_jaminan.isEmpty()) {
-            this.first_objek_jaminan = objek_jaminan.get(0);
-            this.detail_objek_jaminan = jsonUtility.getNestedMap(first_objek_jaminan,
-                    "detail_objek_jaminan");
-            this.automotive = jsonUtility.getNestedMap(detail_objek_jaminan, "automotive");
-            return jsonUtility.getStringValue(automotive, "obj_code");
-        }
-        return "";
+        return jsonUtility.getStringValue(object_pembiayaan, "obj_code");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_desc
+    // (VERDAT)
+    // detail.object_pembiayaan.obj_desc
     public String getObjtDesc(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_desc");
+        return jsonUtility.getStringValue(object_pembiayaan, "obj_desc");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_brand_code
+    // (VERDAT)
+    // detail.object_pembiayaan.brand_code
     public String getObbrCode(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_brand_code");
+        return jsonUtility.getStringValue(object_pembiayaan, "brand_code");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_brand_desc
+    // detail.object_pembiayaan.brand_desc
     public String getObbrDesc(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_brand_desc");
+        return jsonUtility.getStringValue(object_pembiayaan, "brand_desc");
     }
 
     // detail.object_pembiayaan.obj_fuel_desc
@@ -434,28 +423,38 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_type_code
+    // (VERDAT)
+    // detail.object_pembiayaan.type_code
     public String getObtyCode(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_type_code");
+        return jsonUtility.getStringValue(object_pembiayaan, "type_code");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_type_desc
+    // (VERDAT)
+    // detail.object_pembiayaan.type_desc
     public String getObtyDesc(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_type_desc");
+        return jsonUtility.getStringValue(object_pembiayaan, "type_desc");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_model_code
+    // (VERDAT)
+    // detail.object_pembiayaan.model_code
     public String getObmoCode(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_model_code");
+        return jsonUtility.getStringValue(object_pembiayaan, "model_code");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_model_desc
+    // (VERDAT)
+    // detail.object_pembiayaan.model_desc
     public String getObmoDesc(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_model_desc");
+        return jsonUtility.getStringValue(object_pembiayaan, "model_desc");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_year
+    // (VERDAT)
+    // detail.object_pembiayaan.obj_year
     public String getObjtObjYear(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_year");
+        return jsonUtility.getStringValue(object_pembiayaan, "obj_year");
     }
 
     // objt_obj_mfg_year ("")
@@ -464,23 +463,30 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_color
+    // (VERDAT)
+    // objt_color ("")
     public String getObjtColor(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_color");
+        return "";
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.no_mesin
+    // (VERDAT)
+    // objt_frame_no ("")
     public String getObjtFrameNo(Map<String, Object> map) {
         return jsonUtility.getStringValue(automotive, "no_mesin");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.no_rangka
+    // (VERDAT)
+    // objt_engine_no ("")
     public String getObjtEngineNo(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "no_rangka");
+        return "";
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.obj_purpose_desc
+    // detail.identitas_order.obj_purpose_desc
     public String getPurposeDesc(Map<String, Object> map) {
-        return jsonUtility.getStringValue(informasi_aplikasi, "obj_purpose_desc");
+        return jsonUtility.getStringValue(identitas_order, "obj_purpose_desc");
     }
 
     // detail.reguler_survey.personal.informasi_object_pembiayaan.bayar_angsuran_desc
@@ -515,10 +521,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].refund.refund_komisi_langsung
-    // ! BASE IAIR
+    // ! BASE IAIR (VERDAT)
+    // subsidi_dp ("")
     public String getSubsidiDp(Map<String, Object> map) {
-        Map<String, Object> refund = jsonUtility.getNestedMap(first_objek_jaminan, "refund");
-        return jsonUtility.getStringValue(refund, "refund_komisi_langsung");
+        return "";
     }
 
     // joint_promo
@@ -573,9 +579,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.total_principal_amount
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.total_principal_amount
     public String getApplPrincipalAmt(Map<String, Object> map) {
-        this.struktur_kredit = jsonUtility.getNestedMap(first_objek_jaminan, "struktur_kredit");
-        return jsonUtility.getStringValue(struktur_kredit, "total_principal_amount");
+        return jsonUtility.getStringValue(calculation_structure_credit, "total_principal_amount");
     }
 
     // prin_plus_intr_amount (perhitungan)
@@ -595,8 +602,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.tenor
+    // (VERDAT)
+    // detail.object_pembiayaan.tenor
     public String getApplTop(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "tenor");
+        return jsonUtility.getStringValue(object_pembiayaan, "tenor");
     }
 
     // detail.object_pembiayaan.calculation_structure_credit.admin_total_fee
@@ -615,8 +624,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.obj_price
+    // (VERDAT)
+    // detail.object_pembiayaan.obj_price
     public String getOtr(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "obj_price");
+        return jsonUtility.getStringValue(object_pembiayaan, "obj_price");
     }
 
     // detail.object_pembiayaan.calculation_structure_credit.admin_fee
@@ -624,27 +635,37 @@ public class RegulerSurveyMapper {
         return jsonUtility.getStringValue(calculation_structure_credit, "admin_fee");
     }
 
-    // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.gross_dp
+    // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.gross_dp
     public String getApplGrossDp(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "gross_dp");
+        return jsonUtility.getStringValue(calculation_structure_credit, "gross_dp");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktru_kredit.nett_dp
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.nett_dp
     public String getApplNetDp(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "nett_dp");
+        return jsonUtility.getStringValue(calculation_structure_credit, "nett_dp");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.resiko_jaminan_cabang
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.resiko_jaminan_cabang
     public String getDpBranch(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "resiko_jaminan_cabang");
+        return jsonUtility.getStringValue(calculation_structure_credit, "resiko_jaminan_cabang");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.flat_rate
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.flat_rate
     public String getApplIntFlatRate(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "flat_rate");
+        return jsonUtility.getStringValue(calculation_structure_credit, "flat_rate");
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.eff_rate
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.eff_rate
     public String getApplIntEffRate(Map<String, Object> map) {
         return jsonUtility.getStringValue(struktur_kredit, "eff_rate");
     }
@@ -652,7 +673,7 @@ public class RegulerSurveyMapper {
     // detail.object_pembiayaan.calculation_insurance.insurance_total_fee
     public String getApplTotInsFee(Map<String, Object> map) {
         this.calculation_insurance = jsonUtility.getNestedMap(object_pembiayaan, "calculation_insurance");
-        return jsonUtility.getStringValue(calculation_insurance, "eff_rate");
+        return jsonUtility.getStringValue(calculation_insurance, "insurance_total_fee");
     }
 
     // detail.object_pembiayaan.calculation_insurance.insurance_credit_fee
@@ -671,8 +692,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.installment_amount
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.installment_amount
     public String getApplInstAmt(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "installment_amount");
+        return jsonUtility.getStringValue(calculation_structure_credit, "installment_amount");
     }
 
     // tot_ins_fee2 (perhitungan)
@@ -742,21 +765,23 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit.installment_amount
+    // (VERDAT)
+    // detail.object_pembiayaan.calculation_structure_credit.installment_amount
     public String getInstalmentAmount(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "installment_amount");
+        return jsonUtility.getStringValue(calculation_structure_credit, "installment_amount");
     }
 
-    // cust_type
+    // applicant_type_desc
     public String getCustType(Map<String, Object> map) {
         return jsonUtility.getStringValue(message, "applicant_type_desc");
     }
 
-    // cust_no
+    // customer_no
     public String getCustNo(Map<String, Object> map) {
         return jsonUtility.getStringValue(message, "customer_no");
     }
 
-    // cust_sid_name
+    // customer_name
     public String getCustSidName(Map<String, Object> map) {
         return jsonUtility.getStringValue(message, "customer_name");
     }
@@ -878,40 +903,40 @@ public class RegulerSurveyMapper {
     }
 
     // occupation_type : detail.debitur.personal.occupation.occupation_type_code
+    // (VERDAT)
+    // detail.debitur.personal.occupation.debitur.debitur_total_working_time_year
     public String getCustCurrYearOfWork(Map<String, Object> map) {
-        Map<String, Object> occupation = jsonUtility.getNestedMap(personal, "occupation");
-        this.occupation_type_code = jsonUtility.getStringValue(occupation, "occupation_type_code");
-        if (occupation_type_code.equals("01")) {
-            // detail.data_entry_completion.customer.occupation.debitur.debitur_total_working_time_year
-            return jsonUtility.getStringValue(occupationDebitur, "debitur_total_working_time_year");
-        } else {
-            return "";
-        }
+        return jsonUtility.getStringValue(occupationDebitur, "debitur_total_working_time_year");
     }
 
     // detail.data_entry_completion.customer.occupation.debitur.debitur_employee_status_desc
+    // (VERDAT)
+    // detail.debitur.personal.occupation.debitur.debitur_work_fields_desc
     public String getComStatusTempat(Map<String, Object> map) {
-        return jsonUtility.getStringValue(occupationDebitur, "debitur_employee_status_desc");
+        return jsonUtility.getStringValue(occupationDebitur, "debitur_work_fields_desc");
     }
 
     // detail.data_entry_completion.customer.occupation.debitur.debitur_location_desc
+    // (VERDAT)
+    // detail.debitur.personal.occupation.debitur.debitur_location_desc
     public String getComLokasiUsaha(Map<String, Object> map) {
         return jsonUtility.getStringValue(occupationDebitur, "debitur_location_desc");
     }
 
     // detail.data_entry_completion.customer.occupation.debitur.debitur_total_pegawai
+    // (VERDAT)
+    // detail.debitur.personal.occupation.debitur.debitur_total_pegawai
     public String getComTotalEmployee(Map<String, Object> map) {
         return jsonUtility.getStringValue(occupationDebitur, "debitur_total_pegawai");
     }
 
     // occupation_type : detail.debitur.personal.occupation.occupation_type_code
+    // (VERDAT)
+    // detail.data_entry_completion.customer.occupation.debitur.debitur_total_working_time_year
+    // (VERDAT)
+    // detail.debitur.personal.occupation.debitur.debitur_total_working_time_year
     public String getComNoOfYearBuss(Map<String, Object> map) {
-        if (occupation_type_code.equals("02")) {
-            // detail.data_entry_completion.customer.occupation.debitur.debitur_total_working_time_year
-            return jsonUtility.getStringValue(occupationDebitur, "debitur_total_working_time_year");
-        } else {
-            return "";
-        }
+        return jsonUtility.getStringValue(occupationDebitur, "debitur_total_working_time_year");
     }
 
     // cust_pro_lama_profesi
@@ -935,10 +960,10 @@ public class RegulerSurveyMapper {
         return jsonUtility.getStringValue(approval, "approval_status");
     }
 
-    // detail.cetakan_po_sipbpkb_cl.print_date
+    // detail.cetakan_po_sipbpkb_cl.print_date (VERDAT)
+    // tanggal_cetak_po ("")
     public String getTanggalCetakPo(Map<String, Object> map) {
-        this.cetakan_po_sipbpkb_cl = jsonUtility.getNestedMap(detail, "cetakan_po_sipbpkb_cl");
-        return jsonUtility.getStringValue(cetakan_po_sipbpkb_cl, "print_date");
+        return "";
     }
 
     // detail.approval.approval_history[0].note
@@ -1036,9 +1061,10 @@ public class RegulerSurveyMapper {
         }
     }
 
-    // detail.cetakan_po_sipbpkb_cl.flag_cancel
+    // detail.cetakan_po_sipbpkb_cl.flag_cancel (VERDAT)
+    // cancel_pocl ("")
     public String getCancelPocl(Map<String, Object> map) {
-        return jsonUtility.getStringValue(cetakan_po_sipbpkb_cl, "flag_cancel");
+        return "";
     }
 
     // mufnet
@@ -1119,8 +1145,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detal_objek_jaminan.automotive.nama_bpkb
+    // (VERDAT)
+    // detail.reguler_survey.personal.informasi_object_pembiayaan.nama_bpkb
     public String getNamaBpkb(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "nama_bpkb");
+        return jsonUtility.getStringValue(informasi_object_pembiayaan, "nama_bpkb");
     }
 
     // detail.debitur.personal.occupation.occupation_type_desc
@@ -1188,6 +1216,7 @@ public class RegulerSurveyMapper {
         return jsonUtility.getStringValue(inf_debitur, "inf_marital_desc");
     }
 
+    // detail.debitur.personal.debitur_education_desc (VERDAT)
     // detail.debitur.personal.debitur_education_desc
     public String getEducation(Map<String, Object> map) {
         return jsonUtility.getStringValue(personal, "debitur_education_desc");
