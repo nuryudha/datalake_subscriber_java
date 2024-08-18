@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 
 import com.datalake.datalake_subscriber_java.entities.DatalakeEntity;
 import com.datalake.datalake_subscriber_java.repositories.DatalakeRepository;
-import com.datalake.datalake_subscriber_java.services.binding.VerdatBinder;
-import com.datalake.datalake_subscriber_java.services.mapper.VerdatMapper;
+import com.datalake.datalake_subscriber_java.services.binding.RegulerSurveyBinder;
+import com.datalake.datalake_subscriber_java.services.mapper.RegulerSurveyMapper;
 import com.datalake.datalake_subscriber_java.utilities.JsonUtility;
 
-@Component("test-verdat")
-public class VerdatProcessor implements TopicProcessor {
+@Component("test-datalake")
+public class RegulerSurveyProcessor implements TopicProcessor {
 
     @Autowired
     private static Logger logger = LoggerFactory.getLogger(VerdatProcessor.class);
@@ -26,16 +26,16 @@ public class VerdatProcessor implements TopicProcessor {
     private JsonUtility jsonUtility;
 
     @Autowired
-    private VerdatMapper verdatMapper;
+    private RegulerSurveyMapper regulerSurveyMapper;
 
     @Autowired
-    private VerdatBinder verdatBinder;
+    private RegulerSurveyBinder regulerSurveyBinder;
 
     @Override
     // @Transactional
     public void process(String message) {
         Map<String, Object> messageData = jsonUtility.parseMessage(message);
-        String order_id = verdatMapper.getOrderId(messageData);
+        String order_id = regulerSurveyMapper.getOrderId(messageData);
         if (order_id == null || order_id.isEmpty()) {
             logger.warn("Order ID is null or empty.");
             return;
@@ -57,7 +57,7 @@ public class VerdatProcessor implements TopicProcessor {
             logger.info("Entity found for update: Order ID = {}, Current Form = {}", order_id, currentForm);
         }
 
-        verdatBinder.updateEntityFromMessage(entity, messageData);
+        regulerSurveyBinder.updateEntityFromMessage(entity, messageData);
         return entity;
     }
 
