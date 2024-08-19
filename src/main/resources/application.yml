@@ -13,7 +13,9 @@ spring:
       auto-commit-interval: 1000
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
     topic:
+      # result_verifikasi_data: result_verifikasi_data
       test-datalake: test-datalake
       test-regsur: test-regsur
       test-verdat: test-verdat

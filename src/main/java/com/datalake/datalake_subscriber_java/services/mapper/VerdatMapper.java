@@ -35,7 +35,7 @@ public class VerdatMapper {
     private Map<String, Object> detail_objek_jaminan; // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan
     private Map<String, Object> automotive; // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive
     private Map<String, Object> informasi_object_pembiayaan; // detail.reguler_survey.personal.informasi_object_pembiayaan
-    private Map<String, Object> refund; // detail.data_entry_completion.aplikasi.objek_jaminan[0].refund
+    private Map<String, Object> refund; // detail.object_pembiayaan.refund.refund_discount
     private Map<String, Object> struktur_kredit; // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit
     private Map<String, Object> calculation_insurance; // detail.object_pembiayaan.calculation_insurance
     private Map<String, Object> calculation_additional_insurance; // detail.object_pembiayaan.calculation_additional_insurance
@@ -109,16 +109,16 @@ public class VerdatMapper {
 
     // approval_max_level
     public String getMaxApproval(Map<String, Object> map) {
-        return jsonUtility.getStringValue(message, "approval_max_level");
+        return jsonUtility.getLongValue(message, "approval_max_level");
     }
 
     // approval_last_level
     public String getLastApproval(Map<String, Object> map) {
-        return jsonUtility.getStringValue(message, "approval_last_level");
+        return jsonUtility.getLongValue(message, "approval_last_level");
     }
 
     // deviasi.max_deviasi
-    public Long getMaxDeviasi(Map<String, Object> map) {
+    public String getMaxDeviasi(Map<String, Object> map) {
         Map<String, Object> deviasi = jsonUtility.getNestedMap(message, "deviasi");
         return jsonUtility.getLongValue(deviasi, "max_deviasi");
     }
@@ -486,7 +486,9 @@ public class VerdatMapper {
 
     // detail.reguler_survey.personal.informasi_object_pembiayaan.bayar_angsuran_desc
     public String getPaymTypeDesc(Map<String, Object> map) {
-        this.informasi_object_pembiayaan = jsonUtility.getNestedMap(personal, "informasi_object_pembiayaan");
+        this.reguler_survey_personal = jsonUtility.getNestedMap(reguler_survey, "personal");
+        this.informasi_object_pembiayaan = jsonUtility.getNestedMap(reguler_survey_personal,
+                "informasi_object_pembiayaan");
         return jsonUtility.getStringValue(informasi_object_pembiayaan, "bayar_angsuran_desc");
     }
 
@@ -1155,8 +1157,6 @@ public class VerdatMapper {
         String appl_principal_amt = jsonUtility.getStringValue(calculation_structure_credit,
                 "total_principal_amount");
         String otr = jsonUtility.getStringValue(object_pembiayaan, "obj_price");
-        System.out.println("appl_principal_amt: " + appl_principal_amt);
-        System.out.println("otr: " + otr);
         Long safePrincipalAmt = null;
         Long safeOtr = null;
         try {
@@ -1185,7 +1185,6 @@ public class VerdatMapper {
 
     // detail.reguler_survey.personal.informasi_nasabah.inf_debitur.inf_marital_desc
     public String getMarital(Map<String, Object> map) {
-        this.reguler_survey_personal = jsonUtility.getNestedMap(reguler_survey, "personal");
         Map<String, Object> informasi_nasabah = jsonUtility.getNestedMap(reguler_survey_personal, "informasi_nasabah");
         Map<String, Object> inf_debitur = jsonUtility.getNestedMap(informasi_nasabah, "inf_debitur");
         return jsonUtility.getStringValue(inf_debitur, "inf_marital_desc");
@@ -1275,18 +1274,11 @@ public class VerdatMapper {
     }
 
     // detail.data_entry_completion.survey.data_kepemilikan.detail_rumah.year_of_living
-    // (VERDAT)
-    // detail.reguler_survey.personal.informasi_survey.data_informan.[0].deb_tinggal_tahun
-    @SuppressWarnings("unchecked")
     public String getLamaTinggal(Map<String, Object> map) {
-        Map<String, Object> informasi_survey = jsonUtility.getNestedMap(personal, "informasi_survey");
-        List<Map<String, Object>> data_informan = (List<Map<String, Object>>) informasi_survey
-                .get("data_informan");
-        if (data_informan != null && !data_informan.isEmpty()) {
-            Map<String, Object> first_data_informan = data_informan.get(0);
-            return jsonUtility.getStringValue(first_data_informan, "deb_tinggal_tahun");
-        }
-        return "";
+        Map<String, Object> survey = jsonUtility.getNestedMap(data_entry_completion, "survey");
+        Map<String, Object> data_kepemilikan = jsonUtility.getNestedMap(survey, "data_kepemilikan");
+        Map<String, Object> detail_rumah = jsonUtility.getNestedMap(data_kepemilikan, "detail_rumah");
+        return jsonUtility.getStringValue(detail_rumah, "year_of_living");
     }
 
     // bal_prin
@@ -1836,8 +1828,7 @@ public class VerdatMapper {
         }
     }
 
-    // 'detail'->'cetakan_po_sipbpkb_cl'->'data_cancel'->>'cancel_date' as
-    // DATE_CANCEL_POCL
+    // 'detail.cetakan_po_sipbpkb_cl.data_cancel.cancel_date' as DATE_CANCEL_POCL
     public String getDateCancelPocl(Map<String, Object> map) {
         Map<String, Object> data_cancel = jsonUtility.getNestedMap(cetakan_po_sipbpkb_cl, "data_cancel");
         return jsonUtility.getStringValue(data_cancel, "cancel_date");

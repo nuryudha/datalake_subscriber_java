@@ -22,27 +22,16 @@ public class RegulerSurveyMapper {
     private Map<String, Object> calculation_structure_credit; // detail.object_pembiayaan.calculation_structure_credit
     private Map<String, Object> debitur; // detail.debitur
     private Map<String, Object> personal; /// detail.debitur.personal
-    private Map<String, Object> data_entry_completion; // detail.data_entry_completion
-    private Map<String, Object> aplikasi; // detail.data_entry_completion.aplikasi
-    private Map<String, Object> informasi_aplikasi; // detail.data_entry_completion.aplikasi.informasi_aplikasi
-    private Map<String, Object> first_internal_sales_force; // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0]
-    private Map<String, Object> first_external_sales_force; // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[0]
-    private Map<String, Object> second_external_sales_force; // detail.data_entry_completion.aplikasi.informasi_aplikasi.external_sales_force[1]
     private String appl_sales_through; // channel_code
     private String channel_desc; // channel_desc
     private Map<String, Object> supplier; // detail.object_pembiayaan.supplier
-    private Map<String, Object> first_objek_jaminan; // detail.data_entry_completion.aplikasi.objek_jaminan[0]
-    private Map<String, Object> detail_objek_jaminan; // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan
-    private Map<String, Object> automotive; // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive
     private Map<String, Object> informasi_object_pembiayaan; // detail.reguler_survey.personal.informasi_object_pembiayaan
-    private Map<String, Object> refund; // detail.data_entry_completion.aplikasi.objek_jaminan[0].refund
-    private Map<String, Object> struktur_kredit; // detail.data_entry_completion.aplikasi.objek_jaminan[0].struktur_kredit
+    private Map<String, Object> refund; // detail.object_pembiayaan.refund.refund_discount
     private Map<String, Object> calculation_insurance; // detail.object_pembiayaan.calculation_insurance
     private Map<String, Object> calculation_additional_insurance; // detail.object_pembiayaan.calculation_additional_insurance
     private Map<String, Object> alamat_ktp; // detail.debitur.personal.alamat_debitur.alamat_ktp
     private Map<String, Object> occupation; // detail.debitur.personal.occupation
     private Map<String, Object> occupationDebitur; // detail.debitur.personal.occupation.debitur
-    private String occupation_type_code; // detail.debitur.personal.occupation.occupation_type_code
     private Map<String, Object> approval; // detail.approval
     private Map<String, Object> cetakan_po_sipbpkb_cl; // detail.cetakan_po_sipbpkb_cl
     private Map<String, Object> first_approval_history; // detail.aprroval.approval_history[0]
@@ -108,18 +97,19 @@ public class RegulerSurveyMapper {
 
     // approval_max_level
     public String getMaxApproval(Map<String, Object> map) {
-        return jsonUtility.getStringValue(message, "approval_max_level");
+        return jsonUtility.getLongValue(message, "approval_max_level");
     }
 
     // approval_last_level
     public String getLastApproval(Map<String, Object> map) {
-        return jsonUtility.getStringValue(message, "approval_last_level");
+        return jsonUtility.getLongValue(message, "approval_last_level");
     }
 
     // deviasi.max_deviasi
-    public Long getMaxDeviasi(Map<String, Object> map) {
+    public String getMaxDeviasi(Map<String, Object> map) {
         Map<String, Object> deviasi = jsonUtility.getNestedMap(message, "deviasi");
         return jsonUtility.getLongValue(deviasi, "max_deviasi");
+
     }
 
     // appl_ppd_date
@@ -138,11 +128,12 @@ public class RegulerSurveyMapper {
     public String getFinanceProduct(Map<String, Object> map) {
         this.object_pembiayaan = jsonUtility.getNestedMap(detail, "object_pembiayaan"); // detail.object_pembiayaan
         this.calculation_structure_credit = jsonUtility.getNestedMap(object_pembiayaan, "calculation_structure_credit");
-        String finance_product = jsonUtility.getStringValue(calculation_structure_credit, "type_installment_code");
-        if (finance_product != null && !finance_product.isEmpty()) {
-            if (finance_product.equals("01")) {
+        String type_installment_code = jsonUtility.getStringValue(calculation_structure_credit,
+                "type_installment_code");
+        if (type_installment_code != null && !type_installment_code.isEmpty()) {
+            if (type_installment_code.equals("01")) {
                 return "CONSUMER_FINANCE";
-            } else if (finance_product.equals("02")) {
+            } else if (type_installment_code.equals("02")) {
                 return "CONSUMER_LEASE";
             } else {
                 return "";
@@ -473,7 +464,7 @@ public class RegulerSurveyMapper {
     // (VERDAT)
     // objt_frame_no ("")
     public String getObjtFrameNo(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "no_mesin");
+        return "";
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.no_rangka
@@ -491,7 +482,10 @@ public class RegulerSurveyMapper {
 
     // detail.reguler_survey.personal.informasi_object_pembiayaan.bayar_angsuran_desc
     public String getPaymTypeDesc(Map<String, Object> map) {
-        this.informasi_object_pembiayaan = jsonUtility.getNestedMap(personal, "informasi_object_pembiayaan");
+        this.reguler_survey = jsonUtility.getNestedMap(detail, "reguler_survey");
+        this.reguler_survey_personal = jsonUtility.getNestedMap(reguler_survey, "personal");
+        this.informasi_object_pembiayaan = jsonUtility.getNestedMap(reguler_survey_personal,
+                "informasi_object_pembiayaan");
         return jsonUtility.getStringValue(informasi_object_pembiayaan, "bayar_angsuran_desc");
     }
 
@@ -667,7 +661,7 @@ public class RegulerSurveyMapper {
     // (VERDAT)
     // detail.object_pembiayaan.calculation_structure_credit.eff_rate
     public String getApplIntEffRate(Map<String, Object> map) {
-        return jsonUtility.getStringValue(struktur_kredit, "eff_rate");
+        return jsonUtility.getStringValue(calculation_structure_credit, "eff_rate");
     }
 
     // detail.object_pembiayaan.calculation_insurance.insurance_total_fee
@@ -1035,7 +1029,6 @@ public class RegulerSurveyMapper {
         // 'detail'->'cetakan_po_sipbpkb_cl'->>'flag_cancel' as CANCEL_POCL
         String cancelPocl = jsonUtility.getStringValue(cetakan_po_sipbpkb_cl, "flag_cancel");
         // 'detail'->'reguler_survey'->>'flag_reguler_survey' as CANCEL_REGULER,
-        this.reguler_survey = jsonUtility.getNestedMap(detail, "reguler_survey");
         String cancelReguler = jsonUtility.getStringValue(reguler_survey, "flag_reguler_survey");
         // 'detail' -> 'cancelation_status' ->> 'cancel_date' AS CANCEL_TODOLIST,
         Map<String, Object> cancelation_status = jsonUtility.getNestedMap(detail, "cancelation_status");
@@ -1180,8 +1173,6 @@ public class RegulerSurveyMapper {
         String appl_principal_amt = jsonUtility.getStringValue(calculation_structure_credit,
                 "total_principal_amount");
         String otr = jsonUtility.getStringValue(object_pembiayaan, "obj_price");
-        System.out.println("appl_principal_amt: " + appl_principal_amt);
-        System.out.println("otr: " + otr);
         Long safePrincipalAmt = null;
         Long safeOtr = null;
         try {
@@ -1210,7 +1201,6 @@ public class RegulerSurveyMapper {
 
     // detail.reguler_survey.personal.informasi_nasabah.inf_debitur.inf_marital_desc
     public String getMarital(Map<String, Object> map) {
-        this.reguler_survey_personal = jsonUtility.getNestedMap(reguler_survey, "personal");
         Map<String, Object> informasi_nasabah = jsonUtility.getNestedMap(reguler_survey_personal, "informasi_nasabah");
         Map<String, Object> inf_debitur = jsonUtility.getNestedMap(informasi_nasabah, "inf_debitur");
         return jsonUtility.getStringValue(inf_debitur, "inf_marital_desc");
@@ -1300,11 +1290,18 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.survey.data_kepemilikan.detail_rumah.year_of_living
+    // (VERDAT)
+    // detail.reguler_survey.personal.informasi_survey.data_informan.[0].deb_tinggal_tahun
+    @SuppressWarnings("unchecked")
     public String getLamaTinggal(Map<String, Object> map) {
-        Map<String, Object> survey = jsonUtility.getNestedMap(data_entry_completion, "survey");
-        Map<String, Object> data_kepemilikan = jsonUtility.getNestedMap(survey, "data_kepemilikan");
-        Map<String, Object> detail_rumah = jsonUtility.getNestedMap(data_kepemilikan, "detail_rumah");
-        return jsonUtility.getStringValue(detail_rumah, "year_of_living");
+        Map<String, Object> informasi_survey = jsonUtility.getNestedMap(reguler_survey_personal, "informasi_survey");
+        List<Map<String, Object>> data_informan = (List<Map<String, Object>>) informasi_survey
+                .get("data_informan");
+        if (data_informan != null && !data_informan.isEmpty()) {
+            Map<String, Object> first_data_informan = data_informan.get(0);
+            return jsonUtility.getStringValue(first_data_informan, "deb_tinggal_tahun");
+        }
+        return "";
     }
 
     // bal_prin
@@ -1854,21 +1851,23 @@ public class RegulerSurveyMapper {
         }
     }
 
-    // 'detail'->'cetakan_po_sipbpkb_cl'->'data_cancel'->>'cancel_date' as
-    // DATE_CANCEL_POCL
+    // 'detail.cetakan_po_sipbpkb_cl.data_cancel.cancel_date' as DATE_CANCEL_POCL
+    // (VERDAT)
+    // date_cancel_pocl ("")
     public String getDateCancelPocl(Map<String, Object> map) {
-        Map<String, Object> data_cancel = jsonUtility.getNestedMap(cetakan_po_sipbpkb_cl, "data_cancel");
-        return jsonUtility.getStringValue(data_cancel, "cancel_date");
+        return "";
     }
 
-    // detail.cetakan_po_sipbpkb_cl.insert_date
+    // detail.cetakan_po_sipbpkb_cl.insert_date (VERDAT)
+    // insert_date_pocl ("")
     public String getInsertDatePocl(Map<String, Object> map) {
-        return jsonUtility.getStringValue(cetakan_po_sipbpkb_cl, "insert_date");
+        return "";
     }
 
-    // detail.cetakan_po_sipbpkb_cl.print_date
+    // detail.cetakan_po_sipbpkb_cl.print_date (VERDAT)
+    // print_date_pocl ("")
     public String getPrintDatePocl(Map<String, Object> map) {
-        return jsonUtility.getStringValue(cetakan_po_sipbpkb_cl, "print_date");
+        return "";
     }
 
     // date_full_data_entry
@@ -2028,8 +2027,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.objek_jaminan[0].detail_objek_jaminan.automotive.kapasitas
+    // (VERDAT)
+    // detail.object_pembiayaan.eng_capacity
     public String getEngCapacity(Map<String, Object> map) {
-        return jsonUtility.getStringValue(automotive, "kapasitas");
+        return jsonUtility.getStringValue(object_pembiayaan, "eng_capacity");
     }
 
     // detail.identitas_order.fin_scheme_desc
@@ -2063,8 +2064,10 @@ public class RegulerSurveyMapper {
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.financing_scheme_code
+    // (VERDAT)
+    // fin_scheme_code ("")
     public String getFinSchemeCode(Map<String, Object> map) {
-        return jsonUtility.getStringValue(informasi_aplikasi, "financing_scheme_code");
+        return "";
     }
 
     // no_obligor_id

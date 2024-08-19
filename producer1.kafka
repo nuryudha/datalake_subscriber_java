@@ -1,0 +1,229 @@
+
+
+PRODUCER
+topic: test-regsur
+{
+  "Message": {
+    "order_id": "17",
+    "current_form_desc": "Form E",
+    "application_id": "APP78910",
+    "application_date": "2024-08-17",
+    "order_created_date": "2024-08-16",
+    "contract_id": [
+      {
+        "contract_id": "CONTRACT001"
+      }
+    ],
+    "approval_max_level": "5",
+    "approval_last_level": "3",
+    "deviasi": {
+      "max_deviasi": "10"
+    },
+    "detail": {
+      "identitas_order": {
+        "financing_type_desc": "Credit",
+        "mkt_product_desc": "Product X",
+        "debitur_area_branch_desc": "Branch A",
+        "outlet_desc": "Outlet 1",
+        "internal_sales_force": [
+          {
+            "internal_sales_force_npk": "NP123",
+            "internal_sales_force_id": "ID123",
+            "internal_sales_force_desc": "Sales Force A",
+            "internal_sales_job_desc": "Sales Manager",
+            "internal_sales_bank_acc_no": "BANK123456"
+          }
+        ],
+        "external_sales_force": [
+          {
+            "external_sales_name": "John Doe",
+            "external_sales_npk": "EX123",
+            "external_sales_job_desc": "External Sales A",
+            "external_sales_no": "EXT001"
+          },
+          {
+            "external_sales_name": "Jane Smith",
+            "external_sales_npk": "EX124",
+            "external_sales_job_desc": "External Sales B",
+            "external_sales_no": "EXT002"
+          }
+        ]
+      },
+      "data_entry_completion": {
+        "aplikasi": {
+          "objek_jaminan": [
+            {
+              "struktur_kredit": {
+                "type_installment_code": "01",
+                "total_principal_amount": "2",
+                "tenor": "12",
+                "gross_dp": "50000",
+                "nett_dp": "45000",
+                "resiko_jaminan_cabang": "High",
+                "flat_rate": "5",
+                "eff_rate": "4.5",
+                "installment_amount": "85000"
+              },
+              "detail_objek_jaminan": {
+                "automotive": {
+                  "obj_code": "AUTO123",
+                  "obj_desc": "Car Description",
+                  "obj_brand_code": "BRAND01",
+                  "obj_brand_desc": "Brand A",
+                  "obj_type_code": "TYPE01",
+                  "obj_type_desc": "SUV",
+                  "obj_model_code": "MODEL01",
+                  "obj_model_desc": "Model A",
+                  "obj_year": "2024",
+                  "obj_color": "Red",
+                  "no_mesin": "ENG123456",
+                  "no_rangka": "FRAME123456",
+                  "nama_bpkb": "BPKB001"
+                }
+              }
+            }
+          ],
+          "informasi_aplikasi": {
+            "internal_sales_force": [
+              {
+                "internal_sales_force_npk": "NP123",
+                "internal_sales_force_id": "ID123",
+                "internal_sales_force_desc": "Sales Force A",
+                "internal_sales_job_desc": "Sales Manager",
+                "external_sales_no": "EXT001"
+              }
+            ],
+            "external_sales_force": [
+              {
+                "external_sales_name": "John Doe",
+                "external_sales_npk": "EX123",
+                "external_sales_job_desc": "External Sales A",
+                "external_sales_no": "EXT001"
+              }
+            ]
+          }
+        }
+      },
+      "object_pembiayaan": {
+        "total_principal_amount": "16819968",
+        "obj_price": "1",
+        "supplier": {
+          "unit_provider_code": "PROV001",
+          "unit_provider_desc": "Provider A",
+          "rekening_package_code": "REK001",
+          "rekening_package_desc": "Package A"
+        },
+        "calculation_structure_credit": {
+          "type_installment_code": "01",
+          "total_principal_amount": "2",
+          "admin_total_fee": "5000",
+          "admin_credit_fee": "3000",
+          "admin_fee": "2000",
+          "provisi_fee": "1000",
+          "provisi_credit_fee": "500",
+          "gross_dp": "50000",
+          "nett_dp": "45000",
+          "resiko_jaminan_cabang": "High",
+          "flat_rate": "5",
+          "eff_rate": "4.5",
+          "installment_amount": "85000"
+        },
+        "obj_code": "AUTO123",
+        "obj_desc": "Car Description",
+        "brand_code": "BRAND01",
+        "brand_desc": "Brand A",
+        "type_code": "TYPE01",
+        "type_desc": "SUV",
+        "model_code": "MODEL01",
+        "model_desc": "Model A",
+        "obj_year": "2024",
+        "tenor": "12",
+        "obj_price": "1",
+        "eng_capacity": "2000"
+      },
+      "reguler_survey": {
+        "personal": {
+          "informasi_object_pembiayaan": {
+            "nama_bpkb": "BPKB001"
+          },
+          "informasi_survey": {
+            "data_informan": [
+              {
+                "deb_tinggal_tahun": "10"
+              }
+            ]
+          }
+        }
+      },
+      "approval": {
+        "last_approval_date": "2024-08-15",
+        "approval_status": "Approved",
+        "approval_history": [
+          {
+            "note": "Initial approval",
+            "nik": "NIK123",
+            "name": "Approver A"
+          }
+        ]
+      },
+      "cetakan_po_sipbpkb_cl": {
+        "print_date": "2024-08-16",
+        "flag_cancel": "false"
+      },
+      "detail_identitas_order": {
+        "internal_sales_force": [
+          {
+            "internal_sales_head_id": "HEAD123",
+            "internal_sales_head_name": "Head Sales A"
+          }
+        ]
+      },
+      "applicant_type_desc": "Individual",
+      "customer_no": "CUS123456",
+      "customer_name": "Alice Doe",
+      "debitur": {
+        "personal": {
+          "debitur_area_branch_desc": "Branch A",
+          "debitur_jenis_kelamin": "Female",
+          "alamat_debitur": {
+            "alamat_ktp": {
+              "alamat": "Jl. Example",
+              "rt": "01",
+              "rw": "02",
+              "kode_pos": "12345",
+              "desc_kelurahan": "Kelurahan A",
+              "desc_kecamatan": "Kecamatan A",
+              "desc_kab_kot": "Kota A",
+              "desc_provinsi": "Provinsi A"
+            },
+            "occupation": {
+              "debitur_name_of_workplace": "Company A",
+              "debitur_company_type_desc": "Private",
+              "debitur_economic_sector_one_desc": "Retail",
+              "debitur_economic_sector_two_desc": "Wholesale",
+              "debitur_economic_sector_three_desc": "Distribution",
+              "debitur_total_working_time_year": "10",
+              "debitur_employee_status_desc": "Full-time",
+              "debitur_location_desc": "City A",
+              "debitur_total_pegawai": "50"
+            }
+          }
+        }
+      }
+    },
+    "source_order_desc": "Order Source A",
+    "screening_1_date": "2024-08-01",
+    "screening_2_date": "2024-08-05",
+    "screening_3_date": "2024-08-10",
+    "reguler_survey_created_date": "2024-08-15",
+    "grading_customer_category": "Gold"
+  }
+}
+
+
+
+
+
+
+
+

@@ -20,16 +20,28 @@ public class JsonUtility {
 
     }
 
-    public Long getLongValue(Map<String, Object> map, String key) {
+    // public String getLongValue(Map<String, Object> map, String key) {
+    // if (map != null && map.containsKey(key)) {
+    // Object value = map.get(key);
+    // if (value instanceof Long) {
+    // return (Long) value;
+    // } else if (value instanceof Number) {
+    // return ((Number) value).longValue();
+    // }
+    // }
+    // return 0L;
+    // }
+
+    public String getLongValue(Map<String, Object> map, String key) {
         if (map != null && map.containsKey(key)) {
             Object value = map.get(key);
             if (value instanceof Long) {
-                return (Long) value;
+                return value.toString(); // Mengembalikan Long sebagai String
             } else if (value instanceof Number) {
-                return ((Number) value).longValue();
+                return Long.toString(((Number) value).longValue()); // Mengonversi Number ke String
             }
         }
-        return 0L;
+        return null; // Mengembalikan null jika tidak ditemukan
     }
 
     @SuppressWarnings("unchecked")

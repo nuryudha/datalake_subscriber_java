@@ -5,6 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
 import com.datalake.datalake_subscriber_java.entities.DatalakeEntity;
@@ -31,6 +32,9 @@ public class RegulerSurveyProcessor implements TopicProcessor {
     @Autowired
     private RegulerSurveyBinder regulerSurveyBinder;
 
+    private static final String currentForm = "REGULER SURVEY";
+    private static final String topic = "test-regsur";
+
     @Override
     // @Transactional
     public void process(String message) {
@@ -48,13 +52,12 @@ public class RegulerSurveyProcessor implements TopicProcessor {
 
     private DatalakeEntity createOrUpdateEntity(Map<String, Object> messageData, String order_id) {
         DatalakeEntity entity = datalakeRepository.findByOrder_id(order_id);
-        String currentForm = "REGULER SURVEY";
         if (entity == null) {
             entity = new DatalakeEntity();
             entity.setOrder_id(order_id);
-            logger.info("Entity created: Order ID = {}, Current Form = {}", order_id, currentForm);
+            logger.info("Created: Order ID = {}, Topic = {} , Current Form = {}", order_id, topic, currentForm);
         } else {
-            logger.info("Entity found for update: Order ID = {}, Current Form = {}", order_id, currentForm);
+            logger.info("Updated: Order ID = {}, Topic = {} , Current Form = {}", order_id, topic, currentForm);
         }
 
         regulerSurveyBinder.updateEntityFromMessage(entity, messageData);
@@ -62,9 +65,8 @@ public class RegulerSurveyProcessor implements TopicProcessor {
     }
 
     private void saveEntity(DatalakeEntity entity) {
-        String currentFormDesc = "REGULER SURVEY";
         datalakeRepository.save(entity);
-        logger.info("Entity saved: Order ID = {}, Current Form = {}", entity.getOrder_id(), currentFormDesc);
+        logger.info("Saved: Order ID = {}, Topic = {}, Current Form = {}", entity.getOrder_id(), topic, currentForm);
     }
 
 }
