@@ -95,20 +95,22 @@ public class RegulerSurveyMapper {
         return "";
     }
 
-    // approval_max_level
+    // approval_max_level (VERDAT)
+    // ("")
     public String getMaxApproval(Map<String, Object> map) {
-        return jsonUtility.getLongValue(message, "approval_max_level");
+        return "";
     }
 
-    // approval_last_level
+    // approval_last_level (VERDAT)
+    // ("")
     public String getLastApproval(Map<String, Object> map) {
-        return jsonUtility.getLongValue(message, "approval_last_level");
+        return "";
     }
 
     // deviasi.max_deviasi
     public String getMaxDeviasi(Map<String, Object> map) {
         Map<String, Object> deviasi = jsonUtility.getNestedMap(message, "deviasi");
-        return jsonUtility.getLongValue(deviasi, "max_deviasi");
+        return jsonUtility.getStringValue(deviasi, "max_deviasi");
 
     }
 
@@ -192,8 +194,15 @@ public class RegulerSurveyMapper {
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0].internal_sales_force_npk
     // (VERDAT)
     // detail.identitas_order.internal_sales_force[0].internal_sales_force_npk
+    @SuppressWarnings("unchecked")
     public String getInternalSalesForceCode(Map<String, Object> map) {
-        return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_force_id");
+        List<Map<String, Object>> internal_sales_force = (List<Map<String, Object>>) identitas_order
+                .get("internal_sales_force");
+        if (internal_sales_force != null && !internal_sales_force.isEmpty()) {
+            this.first_identitas_order_internal_sales_force = internal_sales_force.get(0);
+            return jsonUtility.getStringValue(first_identitas_order_internal_sales_force, "internal_sales_force_npk");
+        }
+        return "";
     }
 
     // detail.data_entry_completion.aplikasi.informasi_aplikasi.internal_sales_force[0].internal_sales_force_id
@@ -943,10 +952,10 @@ public class RegulerSurveyMapper {
         return "";
     }
 
-    // detail.approval.last_approval_date
+    // detail.approval.last_approval_date (VERDAT)
+    // approved_date ("")
     public String getApprovedDate(Map<String, Object> map) {
-        this.approval = jsonUtility.getNestedMap(detail, "approval");
-        return jsonUtility.getStringValue(approval, "last_approval_date");
+        return ("");
     }
 
     // detail.approval.approval_status
@@ -960,15 +969,9 @@ public class RegulerSurveyMapper {
         return "";
     }
 
-    // detail.approval.approval_history[0].note
-    @SuppressWarnings("unchecked")
+    // detail.approval.approval_history[0].note (VERDAT)
+    // aprrove_note ("")
     public String getApproveNote(Map<String, Object> map) {
-        this.approval = jsonUtility.getNestedMap(detail, "approval");
-        List<Map<String, Object>> approval_history = (List<Map<String, Object>>) approval.get("approval_history");
-        if (approval_history != null && !approval_history.isEmpty()) {
-            this.first_approval_history = approval_history.get(0);
-            return jsonUtility.getStringValue(first_approval_history, "note");
-        }
         return "";
     }
 

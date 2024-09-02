@@ -1,31 +1,24 @@
 package com.datalake.datalake_subscriber_java.entities;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
-@Table(name = "TES_STAGING_DATALAKE_DEV", schema = "report")
-@Getter
-@Setter
-public class DatalakeEntity {
+@Table(name = "STG_DATALAKE")
+@Data
+public class DatalakeEntityBeta {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(length = 50, name = "order_id")
     private String order_id;
-
-    @Column(length = 50, name = "current_form_desc")
     private String current_form_desc;
-
     private String appl_no;
     private String appl_date;
     private String order_date;
@@ -33,6 +26,7 @@ public class DatalakeEntity {
     private String max_approval;
     private String last_approval;
     private String max_deviasi;
+    private String appl_ppd_date;
     private String fin_type;
     private String finance_product;
     private String core_product;
@@ -42,6 +36,7 @@ public class DatalakeEntity {
     private String outlet_channel_desc;
     private String appl_sales_through;
     private String sales_throught;
+    private String initiall;
     private String internal_sales_force_code;
     private String internal_sales_force_nik;
     private String internal_sales_force_name;
@@ -162,8 +157,11 @@ public class DatalakeEntity {
     private String com_no_of_year_buss;
     private String cust_pro_lama_profesi;
     private String jenis_profesi;
+    private String approved_date;
     private String status_appr;
+    private String tanggal_cetak_po;
     private String approve_note;
+    private String tanggal_fpd;
     private String no_fpd;
     private String npk_cmh;
     private String nama_cmh;
@@ -173,11 +171,13 @@ public class DatalakeEntity {
     private String insurance_fee;
     private String appl_admf_komisi_amt;
     private String status_cancel;
-    // private String mufnet;
+    private String cancel_pocl;
+    private String mufnet;
     private String penggolongan_product;
     private String bank_wilayah_mdr;
     private String bank_area_mdr;
     private String flag_cancel;
+    private String cancel_ppd_date;
     private String status_repo;
     private String nik_mca;
     private String nama_mca;
@@ -188,6 +188,8 @@ public class DatalakeEntity {
     private String nama_bpkb;
     private String occupation;
     private String status_indent;
+    private String cancel_reject_date_ca;
+    private String cancel_reject_date_mkt;
     private String ltv;
     private String marital;
     private String education;
@@ -222,7 +224,92 @@ public class DatalakeEntity {
     private String nama_cmh_2;
     private String tipe_restructuring;
     private String no_contract_old;
+    private String screening_1_date;
+    private String screening_2_date;
+    private String insert_date_reguler_survey;
+    private String screening_3_date;
+    private String nik_1;
+    private String nama_1;
+    private String jobcode_1;
+    private String result_1;
+    private String date_1;
+    private String nik_2;
+    private String nama_2;
+    private String jobcode_2;
+    private String result_2;
+    private String date_2;
+    private String nik_3;
+    private String nama_3;
+    private String jobcode_3;
+    private String result_3;
+    private String date_3;
+    private String nik_4;
+    private String nama_4;
+    private String jobcode_4;
+    private String result_4;
+    private String date_4;
+    private String nik_5;
+    private String nama_5;
+    private String jobcode_5;
+    private String result_5;
+    private String date_5;
+    private String nik_6;
+    private String nama_6;
+    private String jobcode_6;
+    private String result_6;
+    private String date_6;
+    private String nik_7;
+    private String nama_7;
+    private String jobcode_7;
+    private String result_7;
+    private String date_7;
+    private String nik_8;
+    private String nama_8;
+    private String jobcode_8;
+    private String result_8;
+    private String date_8;
+    private String nik_9;
+    private String nama_9;
+    private String jobcode_9;
+    private String result_9;
+    private String date_9;
+    private String nik_10;
+    private String nama_10;
+    private String jobcode_10;
+    private String result_10;
+    private String date_10;
+    private String nik_11;
+    private String nama_11;
+    private String jobcode_11;
+    private String result_11;
+    private String date_11;
+    private String nik_12;
+    private String nama_12;
+    private String jobcode_12;
+    private String result_12;
+    private String date_12;
+    private String nik_13;
+    private String nama_13;
+    private String jobcode_13;
+    private String result_13;
+    private String date_13;
+    private String nik_14;
+    private String nama_14;
+    private String jobcode_14;
+    private String result_14;
+    private String date_14;
+    private String nik_15;
+    private String nama_15;
+    private String jobcode_15;
+    private String result_15;
+    private String date_15;
+    private String date_cancel_reguler;
+    private String date_cancel_pocl;
+    private String insert_date_pocl;
+    private String print_date_pocl;
+    private String date_full_data_entry;
     private String cancel_todolist;
+    private String date_cancel_kyc;
     private String fin_prod_desc;
     private String fin_purpose_desc;
     private String nature_of_financing;
@@ -236,11 +323,14 @@ public class DatalakeEntity {
     private String pengajuan_telesurvey;
     private String proses_pembiayaan_telesurvey;
     private String date_telesurvey;
+    private String insert_by_telesurvey;
     private String status_kyc;
+    private String date_kyc;
+    private String insert_by_kyc;
     private String hasil_kyc;
     private String area_id;
-    private Date insert_date;
-    private Date update_date;
+    private String insert_date;
+    private String update_date;
     private String asuransi_kendaraan;
     private String asuransi_tambahan;
     private String eng_capacity;
@@ -255,6 +345,8 @@ public class DatalakeEntity {
     private String no_po_cl;
     private String interest_amount;
     private String biaya_asuransi_tambahan;
+    private String job_internal_sales_forced;
+    private String nama_internal_sales_forced;
     private String keterangan_po;
     private String nilai_pelunasan;
     private String alasan_cancel_po_cl;
@@ -266,9 +358,12 @@ public class DatalakeEntity {
     private String deskripsi_reject_cancel_mkt;
     private String alasan_reject_cancel_mkt;
     private String reject_cancel_source_app;
+    private String deskripsi_source_aplikasi;
     private String alasan_koreksi_po;
     private String nik_koreksi_po;
+    private String tanggal_koreksi_po;
     private String total_koreksi_po;
+    private String cara_bayar_angsuran;
     private String status_aplikasi;
     private String jumlah_nasabah_ditolak;
     private String jumlah_cetak_po_cl;
@@ -279,4 +374,11 @@ public class DatalakeEntity {
     private String jumlah_nasabah_cancel_ppd;
     private String jumlah_tagihan_belum_ppd;
     private String jumlah_reject_cancel_marketing;
+    private String tipe_debitur;
+    private String tanggal_entry;
+    private String tanggal_approval;
+    private String tanggal_cetak;
+    private String tanggal_cancel;
+    private String tanggal_koreksi;
+
 }
