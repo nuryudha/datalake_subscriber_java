@@ -205,14 +205,14 @@ topic: test-regsur
               "debitur": {
                 "debitur_location_id": "",
                 "debitur_position_id": "01",
-                "debitur_location_desc": "",
+                "debitur_location_desc": "Jakarta",
                 "debitur_occupation_id": "01",
                 "debitur_position_desc": "STAFF/OPERATOR",
-                "debitur_total_pegawai": "",
+                "debitur_total_pegawai": "10",
                 "debitur_work_fields_id": "",
                 "debitur_occupation_desc": "KARYAWAN",
                 "debitur_join_income_flag": "Y",
-                "debitur_work_fields_desc": "",
+                "debitur_work_fields_desc": "Jakarta",
                 "debitur_company_type_code": "14",
                 "debitur_company_type_desc": "PT",
                 "debitur_name_of_workplace": "BANK MANDIRI",
@@ -288,7 +288,7 @@ topic: test-regsur
           "fin_scheme_desc": "PPSA",
           "group_cust_code": "",
           "group_cust_desc": "",
-          "old_contract_no": "",
+          "old_contract_no": "REGSUR",
           "fin_purpose_code": "01",
           "fin_purpose_desc": "KENDARAAN",
           "mkt_product_code": "01",
@@ -335,10 +335,10 @@ topic: test-regsur
               "internal_sales_bank_code": "",
               "internal_sales_force_npk": "02GB",
               "internal_sales_head_name": "INDRA GUNAWAN",
-              "internal_sales_type_code": "1",
+              "internal_sales_type_code": "6",
               "internal_sales_type_desc": "INTERNAL SALES 1",
               "internal_sales_force_desc": "JESSE KEVIN TAHALELE",
-              "internal_sales_bank_acc_no": "",
+              "internal_sales_bank_acc_no": "99999",
               "internal_sales_head_job_code": "BRH",
               "internal_sales_head_job_desc": "BUSSINESS RELATION HEAD"
             }
@@ -349,9 +349,9 @@ topic: test-regsur
         "object_pembiayaan": {
           "tenor": "18",
           "refund": {
-            "refund_discount": "0",
-            "refund_admin_fee": "0",
-            "refund_biaya_balik_nama": "0",
+            "refund_discount": "10",
+            "refund_admin_fee": "10",
+            "refund_biaya_balik_nama": "10",
             "refund_supplier_commission": "0",
             "refund_max_mediator_commission": "0"
           },
@@ -421,7 +421,7 @@ topic: test-regsur
             "flag_tjh": "N",
             "flag_eqts": "N",
             "flag_srcc": "N",
-            "insurance_fee": "0",
+            "insurance_fee": "10",
             "flag_insurance": "02",
             "flag_pa_driver": "N",
             "insurance_tenor": "24",
@@ -453,7 +453,7 @@ topic: test-regsur
             "nett_dp": "3300000",
             "eff_rate": "24.00356",
             "gross_dp": "3300000",
-            "admin_fee": "0",
+            "admin_fee": "10",
             "flat_rate": "13.37794",
             "amortisasi": [
               {
@@ -616,11 +616,11 @@ topic: test-regsur
             "provisi_credit_fee": "0",
             "advance_arrear_code": "02",
             "advance_arrear_desc": "IN ARREAR",
-            "resiko_jaminan_cabang": "0",
-            "total_interest_amount": "6311387",
+            "resiko_jaminan_cabang": "10",
+            "total_interest_amount": "200",
             "type_installment_code": "01",
             "type_installment_desc": "ANNUITY",
-            "total_principal_amount": "31451712",
+            "total_principal_amount": "32915000",
             "last_installment_amount": "2097099",
             "first_installment_amount": "2098000"
           },
@@ -650,6 +650,10 @@ topic: test-regsur
         },
         "reguler_survey": {
           "personal": {
+            "cancel_application":{
+              "rotes_reason_cancel" : "REGSUR",
+              "reason_cancel_desc" : "REGSUR2"
+            },
             "informasi_nasabah": {
               "inf_debitur": {
                 "inf_foto_pic_survey": "",

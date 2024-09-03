@@ -1,5 +1,6 @@
 package com.datalake.datalake_subscriber_java.processors;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -52,11 +53,14 @@ public class VerdatProcessor implements TopicProcessor {
 
     private DatalakeEntity createOrUpdateEntity(Map<String, Object> messageData, String order_id) {
         DatalakeEntity entity = datalakeRepository.findByOrder_id(order_id);
+        Date now = new Date();
         if (entity == null) {
             entity = new DatalakeEntity();
             entity.setOrder_id(order_id);
+            entity.setInsert_date(now);
             logger.info("Created: Order ID = {}, Topic = {} , Current Form = {}", order_id, topic, currentForm);
         } else {
+            entity.setUpdate_date(now);
             logger.info("Updated: Order ID = {}, Topic = {} , Current Form = {}", order_id, topic, currentForm);
         }
 

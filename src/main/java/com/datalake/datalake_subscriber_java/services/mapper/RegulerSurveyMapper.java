@@ -53,6 +53,7 @@ public class RegulerSurveyMapper {
                                     // provisi_paid
     private String CAI_provisi_credit_fee; // detail.object_pembiayaan.calculation_structure_credit.provisi_credit_fee
                                            // AS PROVISI_FIN
+    private Map<String, Object> cancel_application; // detail.reguler_survey.personal.cancel_application
     // ? NEW
 
     // order_id = order_id
@@ -175,7 +176,7 @@ public class RegulerSurveyMapper {
 
     // channel_code
     public String getApplSalesThrough(Map<String, Object> map) {
-        String appl_sales_through = jsonUtility.getStringValue(message, "channel_code");
+        this.appl_sales_through = jsonUtility.getStringValue(message, "channel_code");
         return appl_sales_through;
     }
 
@@ -2138,29 +2139,37 @@ public class RegulerSurveyMapper {
         return "";
     }
 
-    // flagging_reject_cancel_mkt
+    // detail.reguler_survey.flag_reguler_survey
     public String getFlaggingRejectCancelMkt(Map<String, Object> map) {
-        return "";
+        String cancel_reguler = jsonUtility.getStringValue(reguler_survey, "flag_reguler_survey");
+        if (cancel_reguler.equals("CACN")) {
+            return cancel_reguler;
+        } else if (cancel_reguler.equals("SBMT")) {
+            return cancel_reguler;
+        } else {
+            return "";
+        }
     }
 
-    // deskripsi_reject_cancel_mkt
+    // detail.reguler_survey.personal.cancel_application.rotes_reason_cancel
     public String getDeskripsiRejectCancelMkt(Map<String, Object> map) {
-        return "";
+        this.cancel_application = jsonUtility.getNestedMap(reguler_survey_personal, "cancel_application");
+        return jsonUtility.getStringValue(cancel_application, "rotes_reason_cancel");
     }
 
-    // alasan_reject_cancel_mkt
+    // detail.reguler_survey.personal.cancel_application.reason_cancel_desc
     public String getAlasanRejectCancelMkt(Map<String, Object> map) {
-        return "";
+        return jsonUtility.getStringValue(cancel_application, "reason_cancel_desc");
     }
 
-    // reject_cancel_source_app
+    // reject_cancel_source_app (MASS)
     public String getRejectCancelSourceApp(Map<String, Object> map) {
-        return "";
+        return "MASS !";
     }
 
-    // deskripsi_source_aplikasi
+    // source_order_desc
     public String getDeskripsiSourceAplikasi(Map<String, Object> map) {
-        return "";
+        return source_order_desc;
     }
 
     // alasan_koreksi_po
@@ -2183,9 +2192,9 @@ public class RegulerSurveyMapper {
         return "";
     }
 
-    // cara_bayar_angsuran
+    // detail.reguler_survey.personal.informasi_object_pembiayaan.bayar_angsuran_desc
     public String getCaraBayarAngsuran(Map<String, Object> map) {
-        return "";
+        return jsonUtility.getStringValue(informasi_object_pembiayaan, "bayar_angsuran_desc");
     }
 
     // status_aplikasi
