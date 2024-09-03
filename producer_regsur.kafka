@@ -375,7 +375,7 @@ topic: test-regsur
             "rekening_commission_code": "8490900099",
             "rekening_commission_desc": "DICKY"
           },
-          "obj_price": "32915000",
+          "obj_price": "28330000",
           "obj_wheel": "2",
           "type_code": "021",
           "type_desc": "SCOOTERMATIC",
@@ -620,7 +620,7 @@ topic: test-regsur
             "total_interest_amount": "200",
             "type_installment_code": "01",
             "type_installment_desc": "ANNUITY",
-            "total_principal_amount": "32915000",
+            "total_principal_amount": "26788509",
             "last_installment_amount": "2097099",
             "first_installment_amount": "2098000"
           },

@@ -296,7 +296,7 @@ public class RegulerSurveyMapper {
 
     // outlet_channel_code
     public String getBankBranchId(Map<String, Object> map) {
-        if (appl_sales_through == "02") {
+        if (appl_sales_through.equals("02")) {
             return jsonUtility.getStringValue(message, "outlet_channel_code");
         } else {
             return "";
@@ -1199,8 +1199,8 @@ public class RegulerSurveyMapper {
         if (safePrincipalAmt == null) {
             return "0";
         }
-        Long ltv = safePrincipalAmt / safeOtr;
-        return Long.toString(ltv);
+        float ltv = (float) safePrincipalAmt / safeOtr;
+        return Float.toString(ltv);
     }
 
     // detail.reguler_survey.personal.informasi_nasabah.inf_debitur.inf_marital_desc

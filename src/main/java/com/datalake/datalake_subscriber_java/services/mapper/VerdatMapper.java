@@ -183,7 +183,7 @@ public class VerdatMapper {
 
     // channel_code
     public String getApplSalesThrough(Map<String, Object> map) {
-        String appl_sales_through = jsonUtility.getStringValue(message, "channel_code");
+        this.appl_sales_through = jsonUtility.getStringValue(message, "channel_code");
         return appl_sales_through;
     }
 
@@ -276,8 +276,9 @@ public class VerdatMapper {
     // 'detail' -> 'identitas_order' -> 'external_sales_force' -> 0->>
     // 'external_sales_no'
     public String getIdEmplMitra(Map<String, Object> map) {
-        if (appl_sales_through == "03") {
-            return jsonUtility.getStringValue(first_external_sales_force, "external_sales_no");
+        if (appl_sales_through.equals("03")) {
+            return jsonUtility.getStringValue(first_external_sales_force,
+                    "external_sales_no");
         } else {
             return "";
         }
@@ -292,7 +293,7 @@ public class VerdatMapper {
     // 'detail' -> 'identitas_order' -> 'external_sales_force' -> 0->>
     // 'external_sales_no'
     public String getEmplNikBank(Map<String, Object> map) {
-        if (appl_sales_through == "02") {
+        if (appl_sales_through.equals("02")) {
             return jsonUtility.getStringValue(first_external_sales_force, "external_sales_no");
         } else {
             return "";
@@ -306,7 +307,7 @@ public class VerdatMapper {
 
     // outlet_channel_code
     public String getBankBranchId(Map<String, Object> map) {
-        if (appl_sales_through == "02") {
+        if (appl_sales_through.equals("02")) {
             return jsonUtility.getStringValue(message, "outlet_channel_code");
         } else {
             return "";
@@ -486,6 +487,7 @@ public class VerdatMapper {
 
     // detail.reguler_survey.personal.informasi_object_pembiayaan.bayar_angsuran_desc
     public String getPaymTypeDesc(Map<String, Object> map) {
+        this.reguler_survey = jsonUtility.getNestedMap(detail, "reguler_survey");
         this.reguler_survey_personal = jsonUtility.getNestedMap(reguler_survey, "personal");
         this.informasi_object_pembiayaan = jsonUtility.getNestedMap(reguler_survey_personal,
                 "informasi_object_pembiayaan");
@@ -883,6 +885,7 @@ public class VerdatMapper {
     // occupation_type : detail.debitur.personal.occupation.occupation_type_code
     public String getCustCurrYearOfWork(Map<String, Object> map) {
         this.occupation_type_code = jsonUtility.getStringValue(occupation, "occupation_type_code");
+        System.out.println("occupation_type_code : " + occupation_type_code);
         if (occupation_type_code.equals("01")) {
             // detail.data_entry_completion.customer.occupation.debitur.debitur_total_working_time_year
             Map<String, Object> customer = jsonUtility.getNestedMap(data_entry_completion, "customer");
@@ -1179,8 +1182,8 @@ public class VerdatMapper {
         if (safePrincipalAmt == null) {
             return "0";
         }
-        Long ltv = safePrincipalAmt / safeOtr;
-        return Long.toString(ltv);
+        float ltv = (float) safePrincipalAmt / safeOtr;
+        return Float.toString(ltv);
     }
 
     // detail.reguler_survey.personal.informasi_nasabah.inf_debitur.inf_marital_desc
