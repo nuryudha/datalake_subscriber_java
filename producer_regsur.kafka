@@ -604,7 +604,7 @@ topic: test-regsur
             "persen_ltv": "95.55",
             "fiducia_fee": "0",
             "notaris_fee": "0",
-            "provisi_fee": "0",
+            "provisi_fee": "10",
             "flag_calculate": "ANGSURAN",
             "admin_total_fee": "650000",
             "admin_credit_fee": "650000",
@@ -613,7 +613,7 @@ topic: test-regsur
             "fiducia_credit_fee": "115000",
             "installment_amount": "2098000",
             "notaris_credit_fee": "0",
-            "provisi_credit_fee": "0",
+            "provisi_credit_fee": "10",
             "advance_arrear_code": "02",
             "advance_arrear_desc": "IN ARREAR",
             "resiko_jaminan_cabang": "10",
@@ -626,7 +626,7 @@ topic: test-regsur
           },
           "calculation_additional_insurance": {
             "total_asuransi": "1071712",
-            "additional_insurance_fee": "0",
+            "additional_insurance_fee": "10",
             "additional_nett_insurance": "0",
             "flag_additional_insurance": "NOFLG",
             "additional_gross_insurance": "0",
@@ -635,9 +635,9 @@ topic: test-regsur
             "additional_insurance_type_code": "",
             "additional_insurance_type_desc": "",
             "additional_insurance_company_id": "",
-            "additional_insurance_credit_fee": "0",
+            "additional_insurance_credit_fee": "10",
             "additional_insurance_gross_rate": "0",
-            "additional_insurance_company_desc": ""
+            "additional_insurance_company_desc": "TIDAK ADA"
           },
           "obj_category": "",
           "exposure_total": "31451712"
