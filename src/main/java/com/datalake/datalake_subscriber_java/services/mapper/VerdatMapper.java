@@ -326,7 +326,7 @@ public class VerdatMapper {
                 "external_sales_job_code");
         String external_sales_job_desc = jsonUtility.getStringValue(first_external_sales_force,
                 "external_sales_job_desc");
-        return external_sales_job_code + external_sales_job_desc;
+        return external_sales_job_code + " - " + external_sales_job_desc;
 
     }
 
@@ -885,7 +885,6 @@ public class VerdatMapper {
     // occupation_type : detail.debitur.personal.occupation.occupation_type_code
     public String getCustCurrYearOfWork(Map<String, Object> map) {
         this.occupation_type_code = jsonUtility.getStringValue(occupation, "occupation_type_code");
-        System.out.println("occupation_type_code : " + occupation_type_code);
         if (occupation_type_code.equals("01")) {
             // detail.data_entry_completion.customer.occupation.debitur.debitur_total_working_time_year
             Map<String, Object> customer = jsonUtility.getNestedMap(data_entry_completion, "customer");
@@ -904,6 +903,8 @@ public class VerdatMapper {
 
     // detail.data_entry_completion.customer.occupation.debitur.debitur_location_desc
     public String getComLokasiUsaha(Map<String, Object> map) {
+        // System.out.println("DEC_occupation_debitur: " +
+        // jsonUtility.getNestedMap(occupation, "debitur"));
         return jsonUtility.getStringValue(DEC_occupation_debitur, "debitur_location_desc");
     }
 

@@ -1096,7 +1096,7 @@ topic: test-verdat
           "fin_scheme_desc": "PPSA",
           "group_cust_code": "",
           "group_cust_desc": "",
-          "old_contract_no": "",
+          "old_contract_no": "9999",
           "fin_purpose_code": "01",
           "fin_purpose_desc": "KENDARAAN",
           "mkt_product_code": "01",
@@ -1674,7 +1674,7 @@ topic: test-verdat
             "additional_insurance_company_id": "",
             "additional_insurance_credit_fee": "10",
             "additional_insurance_gross_rate": "0",
-            "additional_insurance_company_desc": ""
+            "additional_insurance_company_desc": "TIDAK ADA"
           }
         },
         "status_konfirmasi": {
@@ -2415,7 +2415,7 @@ topic: test-verdat
         ]
       },
       "deviasi": {
-        "max_deviasi": 0,
+        "max_deviasi": 10,
         "detail_deviasi": []
       },
       "scoring": {
