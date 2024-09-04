@@ -14,6 +14,7 @@ public class KafkaTopicCustomer {
 
     @KafkaListener(topics = {
             "${spring.kafka.topic.test-datalake}",
+            "${spring.kafka.topic.test-preppd}",
             "${spring.kafka.topic.test-regsur}",
             "${spring.kafka.topic.test-verdat}" }, groupId = "${spring.kafka.consumer.group-id}")
     public void listenToTopics(String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {

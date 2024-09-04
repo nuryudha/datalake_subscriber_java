@@ -19,6 +19,7 @@ spring:
       test-datalake: test-datalake
       test-regsur: test-regsur
       test-verdat: test-verdat
+      test-preppd: test-preppd
 
   datasource:
     url: jdbc:postgresql://localhost:5432/datalake
